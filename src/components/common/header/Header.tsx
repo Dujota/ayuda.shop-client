@@ -1,3 +1,4 @@
+import type { MouseEvent } from "react";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 import styles from "./header.module.css";
@@ -9,6 +10,13 @@ export default function Header() {
   const { data: session, status } = useSession();
   const loading = status === "loading";
 
+  function handleSignOut(e: MouseEvent) {
+    signOut();
+  }
+
+  function handleSignIn(e: MouseEvent) {
+    signIn();
+  }
   return (
     <header>
       <noscript>
@@ -28,10 +36,7 @@ export default function Header() {
               <Link
                 href={`/api/auth/signin`}
                 className={styles.buttonPrimary}
-                onClick={(e) => {
-                  // e.preventDefault()
-                  signIn();
-                }}
+                onClick={handleSignIn}
               >
                 Sign in
               </Link>
@@ -60,10 +65,7 @@ export default function Header() {
               <Link
                 href={`/api/auth/signout`}
                 className={styles.button}
-                onClick={(e) => {
-                  // e.preventDefault()
-                  signOut();
-                }}
+                onClick={handleSignOut}
               >
                 Sign out
               </Link>

@@ -1,10 +1,11 @@
 import NextAuth, { type NextAuthOptions } from "next-auth";
-import DiscordProvider from "next-auth/providers/discord";
 import CredentialsProvider from "next-auth/providers/credentials";
+import DiscordProvider from "next-auth/providers/discord";
+import GoogleProvider from "next-auth/providers/google";
 
 // Services
 import * as Services from "@/lib/auth/services";
-
+// Next Auth Server
 import { env } from "../../../env/server.mjs";
 
 export const authOptions: NextAuthOptions = {
@@ -24,7 +25,6 @@ export const authOptions: NextAuthOptions = {
     async redirect({ url, baseUrl }) {
       return baseUrl;
     },
-
     async jwt({ token, user, account, profile, isNewUser }) {
       return token;
     },
@@ -34,6 +34,10 @@ export const authOptions: NextAuthOptions = {
     DiscordProvider({
       clientId: env.DISCORD_CLIENT_ID,
       clientSecret: env.DISCORD_CLIENT_SECRET,
+    }),
+    GoogleProvider({
+      clientId: env.GOOGLE_CLIENT_ID,
+      clientSecret: env.GOOGLE_CLIENT_SECRET,
     }),
     CredentialsProvider({
       id: "login",
