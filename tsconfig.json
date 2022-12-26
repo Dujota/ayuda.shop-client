@@ -5,6 +5,9 @@
       "@/lib/*": [
         "src/lib/*"
       ],
+      "@/types/*": [
+        "src/types/*"
+      ],
       "@/public/*": [
         "./public/*"
       ],
