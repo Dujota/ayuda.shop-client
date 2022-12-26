@@ -11,12 +11,15 @@ export default function Header() {
   const loading = status === "loading";
 
   function handleSignOut(e: MouseEvent) {
+    e.preventDefault();
     signOut();
   }
 
   function handleSignIn(e: MouseEvent) {
     signIn();
   }
+
+  console.log(session);
   return (
     <header>
       <noscript>
