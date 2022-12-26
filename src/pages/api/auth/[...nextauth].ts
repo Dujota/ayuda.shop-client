@@ -2,30 +2,40 @@ import NextAuth, { type NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import DiscordProvider from "next-auth/providers/discord";
 import GoogleProvider from "next-auth/providers/google";
-
 // Services
 import * as Services from "@/lib/auth/services";
 // Next Auth Server
 import { env } from "../../../env/server.mjs";
+// Types
+import type { UserAPI } from "@/types/auth.js";
 
 export const authOptions: NextAuthOptions = {
   // Include user.id on session
   callbacks: {
-    async session({ session, user }) {
-      if (session.user?.id) {
-        session.user.id = user.id;
-      }
-      return session;
+    async session({ session, user, token }) {
+      // TODO: Pull some information from our use from the rails backend
+
+      // Add the rails api token to our session context
+      return { ...session, accessToken: token.accessToken };
     },
     // CONFIGURE BELOW FOR API CONNECTION
     async signIn({ user, account, profile, email, credentials }) {
-      console.log("signIn", { user, account, profile, email, credentials });
+      // TODO: Implement user role restrictions here
       return true;
     },
     async redirect({ url, baseUrl }) {
       return baseUrl;
     },
     async jwt({ token, user, account, profile, isNewUser }) {
+      // copy over the rails token to the jwt payload
+      if (user) {
+        const data: UserAPI = { ...user };
+
+        if (data?.token) {
+          return { ...token, accessToken: data.token };
+        }
+      }
+
       return token;
     },
   },
@@ -67,10 +77,10 @@ export const authOptions: NextAuthOptions = {
     // }),
     // ...add more providers here
     /* EmailProvider({
-         server: process.env.EMAIL_SERVER,
-         from: process.env.EMAIL_FROM,
-       }),
-    */
+       server: process.env.EMAIL_SERVER,
+       from: process.env.EMAIL_FROM,
+     }),
+  */
   ],
 };
 
