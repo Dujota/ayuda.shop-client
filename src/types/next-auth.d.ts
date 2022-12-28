@@ -1,4 +1,7 @@
+import NextAuth from "next-auth";
+import { JWT } from "next-auth/jwt";
 import { type DefaultSession } from "next-auth";
+import type { UserAPI } from "./auth";
 
 declare module "next-auth" {
   /**
@@ -7,9 +10,18 @@ declare module "next-auth" {
 
   // TODO: revisit why this is still causing TS error in the session callback
   interface Session {
-    accessToken: string;
-    user: {
-      id: string;
-    } & DefaultSession["user"];
+    user: UserAPI & DefaultSession["user"];
+  }
+
+  interface User {
+    token?: string;
+  }
+}
+
+declare module "next-auth/jwt" {
+  /** Returned by the `jwt` callback and `getToken`, when using JWT sessions */
+  interface JWT {
+    /** OpenID ID Token */
+    idToken?: string;
   }
 }

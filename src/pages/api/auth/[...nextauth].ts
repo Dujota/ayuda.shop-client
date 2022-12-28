@@ -7,8 +7,7 @@ import GoogleProvider from "next-auth/providers/google";
 import * as Services from "@/lib/auth/services";
 // Next Auth Server
 import { env } from "../../../env/server.mjs";
-// Types
-import type { UserAPI } from "@/types/auth.js";
+
 export const authOptions: NextAuthOptions = {
   session: {
     // Choose how you want to save the user session.
@@ -47,11 +46,8 @@ export const authOptions: NextAuthOptions = {
     async session({ session, user, token }) {
       // TODO: Pull some information from our user from the rails backend
       // TODO: revisit why adding property to session fails TS type for Session (as per docs we should be able to add)
-
-      // @ts-ignore
-      session.accessToken = token.accessToken;
-      //@ts-ignore
       session.user.id = token.id;
+      session.user.accessToken = token.accessToken;
 
       return session;
     },
@@ -108,9 +104,8 @@ export const authOptions: NextAuthOptions = {
         }
 
         // Credential Login
-        const data: UserAPI = { ...user };
-        if (data?.token) {
-          token.accessToken = data.token;
+        if (user?.token) {
+          token.accessToken = user.token;
           token.id;
         }
       }
