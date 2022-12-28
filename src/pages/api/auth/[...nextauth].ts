@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import NextAuth, { type NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import DiscordProvider from "next-auth/providers/discord";
@@ -45,14 +46,23 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async session({ session, user, token }) {
       // TODO: Pull some information from our user from the rails backend
+      // TODO: revisit why adding property to session fails TS type for Session (as per docs we should be able to add)
 
-      // Add the rails api token to our session context
-      return { ...session, accessToken: token.accessToken };
+      // @ts-ignore
+      session.accessToken = token.accessToken;
+      //@ts-ignore
+      session.user.id = token.id;
+
+      return session;
     },
     // CONFIGURE BELOW FOR API CONNECTION
     async signIn({ user, account, profile, email, credentials }) {
       // TODO: Implement user role restrictions here
-
+      const isEmailLogin =
+        user &&
+        credentials?.csrfToken &&
+        credentials?.email &&
+        credentials?.password;
       // Oauth User needs to be verified with API
       if (profile) {
         const isVerfied = await Services.loginWithProvider({
@@ -64,17 +74,11 @@ export const authOptions: NextAuthOptions = {
         if (isVerfied) {
           return true;
         }
-
         return false;
       }
 
       // Credentials user can continue to sign in
-      if (
-        user &&
-        credentials?.csrfToken &&
-        credentials?.email &&
-        credentials?.password
-      ) {
+      if (isEmailLogin) {
         return true;
       }
 
@@ -97,14 +101,17 @@ export const authOptions: NextAuthOptions = {
           });
 
           if (accessToken) {
-            return { ...token, accessToken };
+            token.accessToken = accessToken;
+            token.id;
+            return token;
           }
         }
 
         // Credential Login
         const data: UserAPI = { ...user };
         if (data?.token) {
-          return { ...token, accessToken: data.token };
+          token.accessToken = data.token;
+          token.id;
         }
       }
 
