@@ -98,7 +98,7 @@ export const authOptions: NextAuthOptions = {
 
           if (accessToken) {
             token.accessToken = accessToken;
-            token.id;
+            token.id = user.id;
             return token;
           }
         }
@@ -106,7 +106,7 @@ export const authOptions: NextAuthOptions = {
         // Credential Login
         if (user?.token) {
           token.accessToken = user.token;
-          token.id;
+          token.id = user.id;
         }
       }
 
