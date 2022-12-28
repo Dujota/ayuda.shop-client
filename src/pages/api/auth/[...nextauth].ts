@@ -8,7 +8,6 @@ import * as Services from "@/lib/auth/services";
 import { env } from "../../../env/server.mjs";
 // Types
 import type { UserAPI } from "@/types/auth.js";
-
 export const authOptions: NextAuthOptions = {
   session: {
     // Choose how you want to save the user session.
@@ -45,17 +44,41 @@ export const authOptions: NextAuthOptions = {
   // Include user.id on session
   callbacks: {
     async session({ session, user, token }) {
-      // TODO: Pull some information from our use from the rails backend
+      // TODO: Pull some information from our user from the rails backend
 
       // Add the rails api token to our session context
-      debugger;
       return { ...session, accessToken: token.accessToken };
     },
     // CONFIGURE BELOW FOR API CONNECTION
     async signIn({ user, account, profile, email, credentials }) {
       // TODO: Implement user role restrictions here
-      debugger;
-      return true;
+
+      // Oauth User needs to be verified with API
+      if (profile) {
+        const isVerfied = await Services.loginWithProvider({
+          user,
+          account,
+          profile,
+        });
+
+        if (isVerfied) {
+          return true;
+        }
+
+        return false;
+      }
+
+      // Credentials user can continue to sign in
+      if (
+        user &&
+        credentials?.csrfToken &&
+        credentials?.email &&
+        credentials?.password
+      ) {
+        return true;
+      }
+
+      return false;
     },
     async redirect({ url, baseUrl }) {
       return baseUrl;
@@ -63,8 +86,23 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user, account, profile, isNewUser }) {
       // copy over the rails token to the jwt payload
       if (user) {
+        if (
+          account?.type === "oauth" &&
+          account?.provider &&
+          account?.providerAccountId
+        ) {
+          const accessToken = await Services.getToken({
+            provider: account.provider,
+            uid: account.providerAccountId,
+          });
+
+          if (accessToken) {
+            return { ...token, accessToken };
+          }
+        }
+
+        // Credential Login
         const data: UserAPI = { ...user };
-        debugger;
         if (data?.token) {
           return { ...token, accessToken: data.token };
         }
