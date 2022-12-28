@@ -6,16 +6,14 @@ import Link from "next/link";
 const Home: NextPage = () => {
   return (
     <>
-      <Layout>
-        <Head>
-          <title>Ayuda me</title>
-          <meta
-            name="description"
-            content="Find the help you need for a project!"
-          />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-      </Layout>
+      <Head>
+        <title>Ayuda me</title>
+        <meta
+          name="description"
+          content="Find the help you need for a project!"
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
     </>
   );
 };

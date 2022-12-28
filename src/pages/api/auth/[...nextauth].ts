@@ -48,17 +48,14 @@ export const authOptions: NextAuthOptions = {
       // TODO: revisit why adding property to session fails TS type for Session (as per docs we should be able to add)
       session.user.id = token.id;
       session.user.accessToken = token.accessToken;
+      session.user.provider = token.provider;
 
       return session;
     },
     // CONFIGURE BELOW FOR API CONNECTION
     async signIn({ user, account, profile, email, credentials }) {
       // TODO: Implement user role restrictions here
-      const isEmailLogin =
-        user &&
-        credentials?.csrfToken &&
-        credentials?.email &&
-        credentials?.password;
+
       // Oauth User needs to be verified with API
       if (profile) {
         const isVerfied = await Services.loginWithProvider({
@@ -74,6 +71,12 @@ export const authOptions: NextAuthOptions = {
       }
 
       // Credentials user can continue to sign in
+      const isEmailLogin =
+        user &&
+        credentials?.csrfToken &&
+        credentials?.email &&
+        credentials?.password;
+
       if (isEmailLogin) {
         return true;
       }
@@ -99,6 +102,7 @@ export const authOptions: NextAuthOptions = {
           if (accessToken) {
             token.accessToken = accessToken;
             token.id = user.id;
+            token.provider = account.provider;
             return token;
           }
         }

@@ -14,6 +14,7 @@ export interface Credentials {
 export interface UserAPI extends User {
   accessToken?: string | any;
   id?: string | any;
+  provider?: string | any;
 }
 
 // TODO: figure out how to spec out the provider
