@@ -16,6 +16,7 @@ export default function Header() {
   }
 
   function handleSignIn(e: MouseEvent) {
+    e.preventDefault();
     signIn();
   }
 
@@ -27,8 +28,8 @@ export default function Header() {
       </noscript>
       <div className={styles.signedInStatus}>
         <p
-          className={`nojs-show ${!session && loading ? styles.loading : styles.loaded
-            }`}
+          // eslint-disable-next-line prettier/prettier
+          className={`nojs-show ${!session && loading ? styles.loading : styles.loaded}`}
         >
           {/* SIGN IN BTN */}
           {!session && (
