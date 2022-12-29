@@ -1,7 +1,7 @@
 import axios from "axios";
 import { TIMEOUT } from "../constants";
 
-export const instanceApiV1 = axios.create({
+export const apiV1 = axios.create({
   baseURL: process.env.V1_API_BASE,
   timeout: TIMEOUT,
   headers: {
@@ -9,7 +9,7 @@ export const instanceApiV1 = axios.create({
   },
 });
 
-export const instanceBase = axios.create({
+export const apiBase = axios.create({
   baseURL: process.env.API_BASE_URL,
   timeout: TIMEOUT,
   headers: {

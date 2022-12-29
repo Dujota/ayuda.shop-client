@@ -1,11 +1,6 @@
 import type { Credentials, loginWithProviderOptions } from "@/types/auth";
 
-import {
-  handleError,
-  instanceApiV1,
-  instanceBase,
-  parseToken,
-} from "@/lib/services";
+import { handleError, apiV1, apiBase, parseToken } from "@/lib/services";
 
 export async function loginWithEmail(credentials: Credentials | undefined) {
   try {
@@ -15,7 +10,7 @@ export async function loginWithEmail(credentials: Credentials | undefined) {
         password: credentials?.password,
       },
     };
-    const userRes = await instanceBase.post("/login", data);
+    const userRes = await apiBase.post("/login", data);
     return { ...userRes.data.data, token: parseToken(userRes) };
   } catch (error: any) {
     handleError(error);
@@ -49,7 +44,7 @@ export async function loginWithProvider({
       },
     };
 
-    const oauthRes = await instanceApiV1.post("/nextauth/oauth", data);
+    const oauthRes = await apiV1.post("/nextauth/oauth", data);
     return oauthRes.data.data;
   } catch (error: any) {
     handleError(error);
