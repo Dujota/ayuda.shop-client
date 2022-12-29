@@ -3,8 +3,11 @@ import NextAuth, { type NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import DiscordProvider from "next-auth/providers/discord";
 import GoogleProvider from "next-auth/providers/google";
+
 // Services
-import * as Services from "@/lib/auth/services";
+import { loginWithProvider, loginWithEmail } from "@/lib/auth/mutations";
+import { getToken } from "@/lib/auth/queries";
+
 // Next Auth Server
 import { env } from "../../../env/server.mjs";
 
@@ -58,7 +61,7 @@ export const authOptions: NextAuthOptions = {
 
       // Oauth User needs to be verified with API
       if (profile) {
-        const isVerfied = await Services.loginWithProvider({
+        const isVerfied = await loginWithProvider({
           user,
           account,
           profile,
@@ -94,7 +97,7 @@ export const authOptions: NextAuthOptions = {
           account?.provider &&
           account?.providerAccountId
         ) {
-          const accessToken = await Services.getToken({
+          const accessToken = await getToken({
             provider: account.provider,
             uid: account.providerAccountId,
           });
@@ -137,7 +140,7 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials, req) {
         try {
-          return await Services.loginWithEmail(credentials);
+          return await loginWithEmail(credentials);
         } catch (error: any) {
           throw new Error(error.message);
         }
