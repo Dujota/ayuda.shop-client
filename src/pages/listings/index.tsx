@@ -4,8 +4,15 @@ import type { GetStaticProps, NextPage } from "next";
 // Service
 import { getAllListings } from "@/lib/listings/queries";
 
+// Components
+import Title from "@/components/common/pages/Title";
+
 const ListingsLandingPage: NextPage = (pageProps) => {
-  return <div>Listings Landing Page</div>;
+  return (
+    <div>
+      <Title>Listings Landing Page</Title>
+    </div>
+  );
 };
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
