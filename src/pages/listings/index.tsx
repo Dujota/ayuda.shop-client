@@ -13,6 +13,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   // Don't forget to include the respective types for any props passed into
   // the component.
   const listings: Listing[] = await getAllListings();
+
   return { props: { listings } };
 };
 
