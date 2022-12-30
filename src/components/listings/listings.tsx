@@ -11,7 +11,7 @@ const Listings = ({ listings }: ListingsProps) => {
   return (
     <section>
       {listings.map((listing, idx) => (
-        <Preview key={idx} listing={listing} />
+        <Preview key={idx} item={listing} />
       ))}
     </section>
   );
