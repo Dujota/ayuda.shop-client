@@ -1,4 +1,6 @@
 // Services
+import PageLoader from "@/components/common/loaders/page-loader";
+import GuestSignin from "@/components/common/pages/guest-signin";
 import Listing from "@/components/listings/listing";
 import { getOne } from "@/lib/listings/queries";
 
@@ -16,11 +18,11 @@ const ListingDetailPage: NextPage = ({ listing }: Props) => {
   const { data: session, status } = useSession();
 
   if (status === "loading") {
-    return <p>Loading...</p>;
+    return <PageLoader />;
   }
 
   if (status === "unauthenticated") {
-    return <p>Access Denied</p>;
+    return <GuestSignin />;
   }
 
   if (!listing) return null;
