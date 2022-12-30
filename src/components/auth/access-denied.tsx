@@ -1,5 +1,5 @@
-import { signIn } from "next-auth/react"
-import Link from "next/link"
+import { signIn } from "next-auth/react";
+import Link from "next/link";
 
 export default function AccessDenied() {
   return (
@@ -10,12 +10,12 @@ export default function AccessDenied() {
           href="/api/auth/signin"
           onClick={(e) => {
             // e.preventDefault()
-            signIn()
+            signIn();
           }}
         >
           You must be signed in to view this page
         </Link>
       </p>
     </>
-  )
+  );
 }

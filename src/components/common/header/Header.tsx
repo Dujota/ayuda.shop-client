@@ -20,7 +20,6 @@ export default function Header() {
     signIn();
   }
 
-  console.log(session);
   return (
     <header>
       <noscript>

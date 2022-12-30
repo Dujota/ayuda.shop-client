@@ -1,8 +1,7 @@
+import type { ReactNode } from "react";
 
-import type { ReactNode } from "react"
-
-import Header from "@/common/header/Header"
-import Footer from "@/common/footer/Footer"
+import Header from "@/components/common/header/header";
+import Footer from "@/components/common/footer/footer";
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
@@ -11,5 +10,5 @@ export default function Layout({ children }: { children: ReactNode }) {
       <main>{children}</main>
       <Footer />
     </>
-  )
+  );
 }
