@@ -11,12 +11,22 @@ export async function getAllListings() {
   }
 }
 
+type getOneOptions = {
+  slug: string;
+  accessToken: string;
+};
+
 // AUTH
-export async function getOne(slug = "") {
-  if (!slug) return null;
+export async function getOne({ slug, accessToken }: getOneOptions) {
+  if (!slug || !accessToken) return null;
 
   try {
-    const listing = await apiV1.get(`/listings/${slug}`);
+    const config = {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    };
+    const listing = await apiV1.get(`/listings/${slug}`, config);
 
     return listing.data;
   } catch (error: any) {

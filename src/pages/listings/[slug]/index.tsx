@@ -41,7 +41,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   const accessToken = session?.user?.accessToken;
 
   // TODO: Setup some logic to view the public listing page
-  // Sol
+  // TODO: Make this condition a util for all routes.
   if (!accessToken) {
     return {
       redirect: {
@@ -55,7 +55,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   if (!slug || typeof slug !== "string") return { props: { listing: null } };
 
   if (slug) {
-    const listing: ListingType = await getOne(slug);
+    const listing: ListingType = await getOne({ slug, accessToken });
     return { props: { listing } };
   }
 
