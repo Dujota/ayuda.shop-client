@@ -1,17 +1,23 @@
+// Services
+import Listing from "@/components/listings/listing";
 import { getOne } from "@/lib/listings/queries";
+
+// Types
 import type { Listing as ListingType } from "@/types/listing";
-import type { GetServerSidePropsContext, NextPage } from "next";
-import type { GetServerSideProps } from "next";
-import { useRouter } from "next/router";
+import type { NextPage, GetServerSideProps } from "next";
 
 type Props = {
   listing?: ListingType;
 };
 
 const ListingDetailPage: NextPage = ({ listing }: Props) => {
-  const router = useRouter();
+  if (!listing) return null;
 
-  return <p>{listing?.title}</p>;
+  return (
+    <section>
+      <Listing listing={listing} />
+    </section>
+  );
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {

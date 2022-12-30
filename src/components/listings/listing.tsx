@@ -1,14 +1,20 @@
 import type { Listing as ListingType } from "@/types/listing";
+import DateFormatter from "@/components/common/utils/date-formatter";
 type ListingProps = {
   listing: ListingType;
 };
 
-const Listing = ({ listing: { title, description } }: ListingProps) => {
+const Listing = ({
+  listing: { title, description, created_at },
+}: ListingProps) => {
   return (
-    <section>
+    <div>
       <h1>{title}</h1>
+      <br />
       <p>{description}</p>
-    </section>
+      <br />
+      <DateFormatter dateString={created_at} />
+    </div>
   );
 };
 
