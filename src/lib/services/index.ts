@@ -20,7 +20,8 @@ export const apiBase = axios.create({
 export function handleError(error: any) {
   if (axios.isAxiosError(error)) {
     console.error("error message: ", error.message);
-
+    // TODO: throwing the error triggers react.errorboundary when fetching in getServerSideProps
+    // these errors include 401 from the api (any api error code)
     throw new Error(error.message);
   } else {
     console.error("unexpected error: ", error);

@@ -1,4 +1,5 @@
 import { handleError, apiV1 } from "@/lib/services";
+import type { authPageOptions } from "@/types/pages";
 
 // PUBLIC
 export async function getAllListings() {
@@ -11,13 +12,8 @@ export async function getAllListings() {
   }
 }
 
-type getOneOptions = {
-  slug: string;
-  accessToken: string;
-};
-
 // AUTH
-export async function getOne({ slug, accessToken }: getOneOptions) {
+export async function getOne({ slug, accessToken }: authPageOptions) {
   if (!slug || !accessToken) return null;
 
   try {

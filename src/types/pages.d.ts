@@ -9,3 +9,9 @@ export type NextPageWithLayout<P = object, IP = P> = NextPage<P, IP> & {
 export type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
+
+export type authPageOptions = {
+  slug?: string;
+  id?: string;
+  accessToken: string;
+};
