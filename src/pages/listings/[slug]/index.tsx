@@ -8,7 +8,7 @@ import { getOne } from "@/lib/listings/queries";
 import type { Listing as ListingType } from "@/types/listing";
 import type { NextPage, GetServerSideProps } from "next";
 import { useSession } from "next-auth/react";
-import { getServerAuthSession } from "src/server/common/get-server-auth-session";
+import { getServerAuthSession } from "@/server/common/get-server-auth-session";
 
 type Props = {
   listing?: ListingType;

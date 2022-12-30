@@ -12,5 +12,6 @@ export type AppPropsWithLayout = AppProps & {
 
 export type authPageOptions = {
   slug?: string;
+  id?: string;
   accessToken: string;
 };

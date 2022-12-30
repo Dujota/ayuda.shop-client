@@ -7,3 +7,10 @@ export interface Listing {
   created_at: string;
   updated_at: string;
 }
+
+export type ListingType = {
+  id: number;
+  tag: string;
+  created_at: string;
+  updated_at: string;
+};
