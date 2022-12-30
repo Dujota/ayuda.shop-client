@@ -5,3 +5,5 @@
 export const TIMEOUT = process.env.API_TIMEOUT
   ? parseInt(process.env.API_TIMEOUT)
   : 5000;
+
+export const AUTH_ROUTES = process.env.AUTH_ROUTES?.split(",");
