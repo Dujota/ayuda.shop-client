@@ -17,11 +17,21 @@ export const apiBase = axios.create({
   },
 });
 
+export const nextApi = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  timeout: TIMEOUT,
+  headers: {
+    Accept: "application/json",
+  },
+});
+
 export function handleError(error: any) {
+  debugger;
   if (axios.isAxiosError(error)) {
     console.error("error message: ", error.message);
     // TODO: throwing the error triggers react.errorboundary when fetching in getServerSideProps
     // these errors include 401 from the api (any api error code)
+    console.log(error);
     throw new Error(error.message);
   } else {
     console.error("unexpected error: ", error);
