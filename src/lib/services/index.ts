@@ -25,13 +25,44 @@ export const nextApi = axios.create({
   },
 });
 
+export function handleSuccess(response: any) {
+  // api validation error response - preformatted with handle error
+  // are passed through the catch.
+  if (response.data?.data) {
+    debugger;
+    return response.data.data;
+  }
+
+  const { data, status, statusText } = response;
+  return {
+    data,
+    status,
+    statusText,
+    errors: null,
+  };
+}
+
 export function handleError(error: any) {
-  debugger;
   if (axios.isAxiosError(error)) {
     console.error("error message: ", error.message);
     // TODO: throwing the error triggers react.errorboundary when fetching in getServerSideProps
     // these errors include 401 from the api (any api error code)
     console.log(error);
+    if (error.response?.data) {
+      const { status, statusText, data: apiErrors } = error.response;
+
+      // Handle API model validations gracefully
+      if (status === 422 && statusText === "Unprocessable Entity") {
+        return {
+          data: null,
+          status,
+          statusText,
+          errors: apiErrors,
+        };
+      }
+    }
+
+    // Catch any other messages with the fetcher
     throw new Error(error.message);
   } else {
     console.error("unexpected error: ", error);

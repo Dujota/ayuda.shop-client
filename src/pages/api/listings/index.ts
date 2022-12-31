@@ -11,10 +11,15 @@ const restricted = async (req: NextApiRequest, res: NextApiResponse) => {
     if (session?.user?.accessToken) {
       const { accessToken } = session.user;
 
-      const newListing = await createListing({ data: req.body, accessToken });
-      res.send({
-        data: newListing,
-      });
+      try {
+        const newListing = await createListing({ data: req.body, accessToken });
+        res.send({
+          data: newListing,
+        });
+      } catch (error) {
+        // TODO: Do we need to handle this with a message?
+        res.status(422).send(error);
+      }
     } else {
       res.send(401);
     }

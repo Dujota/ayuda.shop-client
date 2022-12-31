@@ -1,4 +1,4 @@
-import { handleError, apiV1, nextApi } from "@/lib/services";
+import { handleError, apiV1, nextApi, handleSuccess } from "@/lib/services";
 import type { NewListingRequest } from "@/types/listing";
 
 type CreateListingsOptions = {
@@ -11,8 +11,6 @@ export async function createListing({
   accessToken,
   data,
 }: CreateListingsOptions) {
-  // if (!accessToken) throw new Error("401 - Access Denied");
-
   try {
     let newListingRes;
     if (accessToken) {
@@ -23,13 +21,12 @@ export async function createListing({
       };
 
       newListingRes = await apiV1.post("/listings", data, config);
-      debugger;
     } else {
       newListingRes = await nextApi.post("/listings", data);
     }
 
-    return newListingRes.data;
+    return handleSuccess(newListingRes);
   } catch (error: any) {
-    handleError(error);
+    return handleError(error);
   }
 }

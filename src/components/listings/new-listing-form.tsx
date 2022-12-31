@@ -1,12 +1,14 @@
-// Hook Form
+// Hooks
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 
 // Types
+import type { SubmitHandler } from "react-hook-form";
+import type { ApiResponse } from "@/types/services";
 import type {
   ListingTypeIndexProps,
   NewListingFormValues,
 } from "@/types/listing";
-import type { SubmitHandler } from "react-hook-form";
 
 //Component
 import FieldError from "../common/forms/field-error";
@@ -14,12 +16,32 @@ import { useSession } from "next-auth/react";
 import { createListing } from "@/lib/listings/mutations";
 
 const NewListingForm = ({ types }: ListingTypeIndexProps) => {
+  const { data: session } = useSession();
+  const router = useRouter();
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    reset,
+    formState: { errors, isSubmitSuccessful },
+    setError,
   } = useForm<NewListingFormValues>();
-  const { data: session } = useSession();
+
+  console.log("isSubmitSuccessful", isSubmitSuccessful);
+
+  const handleResponse = (res: ApiResponse) => {
+    debugger;
+    if (res.data) {
+      const done = window.confirm(`Listing with ID: ${res.data?.id} is created.
+      Are you done?
+      `);
+
+      if (done) {
+        router.push("/listings");
+      } else {
+        reset();
+      }
+    }
+  };
 
   const onSubmit: SubmitHandler<NewListingFormValues> = async ({
     type,
@@ -32,9 +54,13 @@ const NewListingForm = ({ types }: ListingTypeIndexProps) => {
         description,
         title,
       };
-
-      const newListing = await createListing({ data });
-      debugger;
+      try {
+        const res: ApiResponse = await createListing({ data });
+        handleResponse(res);
+      } catch (error) {
+        // TODO: Remove or handle gracefully 500s?
+        console.error("Error with create listings ocurred", error);
+      }
     }
   };
 
