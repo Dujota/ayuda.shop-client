@@ -14,3 +14,13 @@ export type ListingType = {
   created_at: string;
   updated_at: string;
 };
+
+export type ListingTypeIndexProps = {
+  types?: ListingType[];
+};
+
+export type NewListingFormValues = {
+  type: string;
+  title: string;
+  description: string;
+};

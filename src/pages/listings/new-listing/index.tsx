@@ -3,18 +3,15 @@ import PageLoader from "@/components/common/loaders/page-loader";
 import GuestSignin from "@/components/common/pages/guest-signin";
 import { getAllTypes } from "@/lib/types/queries";
 // Types
-import type { ListingType } from "@/types/listing";
+import type { ListingType, ListingTypeIndexProps } from "@/types/listing";
 import type { GetServerSideProps, NextPage } from "next";
 
 // Hooks
 import { useSession } from "next-auth/react";
 import { getServerAuthSession } from "@/server/common/get-server-auth-session";
+import NewListingForm from "@/components/listings/new-listing-form";
 
-type Props = {
-  types?: ListingType[];
-};
-
-const NewListing: NextPage = ({ types }: Props) => {
+const NewListing: NextPage = ({ types }: ListingTypeIndexProps) => {
   const { data: session, status } = useSession();
 
   if (status === "loading") {
@@ -24,7 +21,13 @@ const NewListing: NextPage = ({ types }: Props) => {
   if (status === "unauthenticated") {
     return <GuestSignin />;
   }
-  return <div>NewListing</div>;
+
+  return (
+    <section>
+      <h1>Tell us more about your Listing</h1>
+      <NewListingForm types={types} />
+    </section>
+  );
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
@@ -42,9 +45,18 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
       },
     };
   }
-  const types: ListingType[] = await getAllTypes(accessToken);
-
-  return { props: { types } };
+  try {
+    const types: ListingType[] = await getAllTypes(accessToken);
+    return { props: { types } };
+  } catch (error) {
+    // TODO: handle the session timeouts gracefully
+    return {
+      redirect: {
+        destination: "/listings",
+        permanent: false,
+      },
+    };
+  }
 };
 
 export default NewListing;
