@@ -1,10 +1,15 @@
-import type { ListingTypeIndexProps } from "@/types/listing";
+import type {
+  ListingTypeIndexProps,
+  NewListingFormValues,
+} from "@/types/listing";
+import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 
 const NewListingForm = ({ types }: ListingTypeIndexProps) => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm<NewListingFormValues>();
 
-  const onSubmit = (data: any) => alert(JSON.stringify(data));
+  const onSubmit: SubmitHandler<NewListingFormValues> = (data) =>
+    alert(JSON.stringify(data));
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -22,7 +27,7 @@ const NewListingForm = ({ types }: ListingTypeIndexProps) => {
       })}
       <br />
       <input
-        {...register("Title", { required: true, minLength: 10, maxLength: 40 })}
+        {...register("title", { required: true, minLength: 10, maxLength: 40 })}
         placeholder="Short Description that others can see"
       />
       <br />
