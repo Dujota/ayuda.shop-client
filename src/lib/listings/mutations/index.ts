@@ -1,21 +1,34 @@
-import { handleError, apiV1 } from "@/lib/services";
-import type { authPageOptions } from "@/types/pages";
+import { handleError, apiV1, nextApi } from "@/lib/services";
+import type { NewListingRequest } from "@/types/listing";
 
 type CreateListingsOptions = {
-  accessToken: string;
+  accessToken?: string;
+  data: NewListingRequest;
 };
 
 // Auth
-export async function createListing({ accessToken }) {
-  try {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    };
-    const listings = await apiV1.get("/types", config);
+export async function createListing({
+  accessToken,
+  data,
+}: CreateListingsOptions) {
+  // if (!accessToken) throw new Error("401 - Access Denied");
 
-    return listings.data;
+  try {
+    let newListingRes;
+    if (accessToken) {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      };
+
+      newListingRes = await apiV1.post("/listings", data, config);
+      debugger;
+    } else {
+      newListingRes = await nextApi.post("/listings", data);
+    }
+
+    return newListingRes.data;
   } catch (error: any) {
     handleError(error);
   }

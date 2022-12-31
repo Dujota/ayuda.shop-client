@@ -24,7 +24,7 @@ const NewListing: NextPage = ({ types }: ListingTypeIndexProps) => {
 
   return (
     <section>
-      <h1>Tell us more about your Listing</h1>
+      <h1>Publish a new listing</h1>
       <NewListingForm types={types} />
     </section>
   );
