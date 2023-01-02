@@ -27,8 +27,6 @@ const NewListingForm = ({ types }: ListingTypeIndexProps) => {
     setError,
   } = useForm<NewListingFormValues>();
 
-  console.log("errors", errors);
-
   const confirmProceed = (listing: Listing) => {
     if (listing?.id) {
       const done = window.confirm(`Listing with ID: ${listing?.id} is created.
@@ -103,7 +101,7 @@ const NewListingForm = ({ types }: ListingTypeIndexProps) => {
           </label>
         );
       })}
-      console.log(errors)
+
       {errors.type && <FieldError error={errors.type} />}
       <br />
       <label htmlFor="title">
