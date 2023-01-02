@@ -29,7 +29,6 @@ export function handleSuccess(response: any) {
   // api validation error response - preformatted with handle error
   // are passed through the catch.
   if (response.data?.data) {
-    debugger;
     return response.data.data;
   }
 
