@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import type { SubmitHandler } from "react-hook-form";
 import type { ApiResponse } from "@/types/services";
 import type {
+  Listing,
   ListingTypeIndexProps,
   NewListingFormValues,
 } from "@/types/listing";
@@ -26,12 +27,11 @@ const NewListingForm = ({ types }: ListingTypeIndexProps) => {
     setError,
   } = useForm<NewListingFormValues>();
 
-  console.log("isSubmitSuccessful", isSubmitSuccessful);
+  console.log("errors", errors);
 
-  const handleResponse = (res: ApiResponse) => {
-    debugger;
-    if (res.data) {
-      const done = window.confirm(`Listing with ID: ${res.data?.id} is created.
+  const confirmProceed = (listing: Listing) => {
+    if (listing?.id) {
+      const done = window.confirm(`Listing with ID: ${listing?.id} is created.
       Are you done?
       `);
 
@@ -41,6 +41,31 @@ const NewListingForm = ({ types }: ListingTypeIndexProps) => {
         reset();
       }
     }
+  };
+
+  // TODO: create a generic error generator for react hook form (converts rails validations to hook form)
+  const updateFormErrors = (errors: {
+    title?: string[];
+    description?: string[];
+  }) => {
+    if (errors.title?.length) {
+      errors.title.forEach((errMsg) =>
+        setError("title", {
+          types: {
+            // the type will need to be inferred in the component
+            unique: `This title ${errMsg}`,
+          },
+        })
+      );
+    }
+  };
+
+  const handleResponse = (res: ApiResponse) => {
+    if (res.errors) {
+      updateFormErrors(res.errors);
+    }
+
+    confirmProceed(res.data);
   };
 
   const onSubmit: SubmitHandler<NewListingFormValues> = async ({
@@ -78,6 +103,7 @@ const NewListingForm = ({ types }: ListingTypeIndexProps) => {
           </label>
         );
       })}
+      console.log(errors)
       {errors.type && <FieldError error={errors.type} />}
       <br />
       <label htmlFor="title">
@@ -91,6 +117,9 @@ const NewListingForm = ({ types }: ListingTypeIndexProps) => {
           placeholder="Short Description that others can see"
         />
         {errors.title && <FieldError error={errors.title} />}
+        {errors.title && errors.title.types && (
+          <FieldError error={errors.title.types?.unique} />
+        )}
       </label>
       <br />
       <label htmlFor="description">

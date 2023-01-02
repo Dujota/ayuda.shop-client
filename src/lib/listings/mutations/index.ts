@@ -19,9 +19,9 @@ export async function createListing({
           Authorization: `Bearer ${accessToken}`,
         },
       };
-
       newListingRes = await apiV1.post("/listings", data, config);
     } else {
+      // Next.js API Gateway
       newListingRes = await nextApi.post("/listings", data);
     }
 
