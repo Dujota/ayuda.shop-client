@@ -8,7 +8,6 @@ export default function RegistrationForm() {
     formState: { errors },
   } = useForm();
   const onSubmit = (data: any) => console.log(data);
-  console.log(errors);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

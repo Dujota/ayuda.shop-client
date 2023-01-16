@@ -103,7 +103,7 @@ const NewListingForm = ({ types }: ListingTypeIndexProps) => {
           </label>
         );
       })}
-      console.log(errors)
+
       {errors.type && <FieldError error={errors.type} />}
       <br />
       <label htmlFor="title">
