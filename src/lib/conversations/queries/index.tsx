@@ -11,9 +11,9 @@ export async function getMyConversations({ accessToken }: authPageOptions) {
       },
     };
 
-    const conversations = await apiV1.get("/conversations", config);
+    const convRes = await apiV1.get("/conversations", config);
 
-    return conversations.data;
+    return convRes.data.data;
   } catch (error: any) {
     handleError(error);
   }
@@ -28,9 +28,9 @@ export async function getOne({ slug, accessToken }: authPageOptions) {
         Authorization: `Bearer ${accessToken}`,
       },
     };
-    const conversation = await apiV1.get(`/covnersations/${slug}`, config);
+    const convRes = await apiV1.get(`/conversations/${slug}`, config);
 
-    return conversation.data;
+    return convRes.data.data;
   } catch (error: any) {
     handleError(error);
   }

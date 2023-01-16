@@ -1,20 +1,22 @@
 // Services
 import PageLoader from "@/components/common/loaders/page-loader";
 import GuestSignin from "@/components/common/pages/guest-signin";
-import Listing from "@/components/listings/listing";
-import { getOne } from "@/lib/listings/queries";
 
-// Types
-import type { Listing as ListingType } from "@/types/listing";
-import type { NextPage, GetServerSideProps } from "next";
-import { useSession } from "next-auth/react";
+// Queries
+import { getOne } from "@/lib/conversations/queries";
 import { getServerAuthSession } from "@/server/common/get-server-auth-session";
 
-type Props = {
-  listing?: ListingType;
-};
+// Hooks
+import { useSession } from "next-auth/react";
 
-const ListingDetailPage: NextPage = ({ listing }: Props) => {
+// Types
+import type { NextPage, GetServerSideProps } from "next";
+import type { Conversation, ConversationResponse } from "@/types/conversations";
+
+const ConversationDetailPage: NextPage = ({
+  conversation,
+  messages,
+}: ConversationResponse) => {
   const { data: session, status } = useSession();
 
   if (status === "loading") {
@@ -25,11 +27,18 @@ const ListingDetailPage: NextPage = ({ listing }: Props) => {
     return <GuestSignin />;
   }
 
-  if (!listing) return null;
+  if (!conversation) return null;
 
   return (
     <section>
-      <Listing listing={listing} />
+      <h1>{conversation.id}</h1>
+      <ul>
+        {messages?.map((message) => (
+          <li key={message.id}>
+            <p>{message.content}</p>
+          </li>
+        ))}
+      </ul>
     </section>
   );
 };
@@ -54,14 +63,18 @@ export const getServerSideProps: GetServerSideProps = async ({
   }
 
   const slug = params?.slug;
-  if (!slug || typeof slug !== "string") return { props: { listing: null } };
+  if (!slug || typeof slug !== "string")
+    return { props: { conversation: null } };
 
   if (slug) {
-    const listing: ListingType = await getOne({ slug, accessToken });
-    return { props: { listing } };
+    const { conversation, messages }: ConversationResponse = await getOne({
+      slug,
+      accessToken,
+    });
+    return { props: { conversation, messages } };
   }
 
-  return { props: { listing: null } };
+  return { props: { conversation: null } };
 };
 
-export default ListingDetailPage;
+export default ConversationDetailPage;

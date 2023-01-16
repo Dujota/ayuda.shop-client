@@ -7,8 +7,29 @@ export interface Conversation {
   updated_at: string;
 }
 
+export interface Message {
+  id: number;
+  conversation_id: number;
+  sender_id: number;
+  recipient_id: number;
+  content: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export type ConversationResponse = {
+  conversation?: Conversation;
+  messages?: Message[];
+};
+
 export type ConversationIndexProps = {
   conversations?: Conversation[];
+};
+
+export type ConversationFormProps = {
+  listing_id: string;
+  recipient_id: string;
+  sender_id: string;
 };
 
 export type NewConversationFormValues = {
