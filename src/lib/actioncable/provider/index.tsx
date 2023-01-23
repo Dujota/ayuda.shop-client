@@ -6,9 +6,9 @@ import type { Channel } from "@/types/actioncable";
 
 interface CableAppProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  cable: any;
+  cable?: any;
   // i need the typing for  cable?.subscriptions?.create(
-  subscriptions: {
+  subscriptions?: {
     create: (
       arg0: { channel: string; id: string | number },
       arg1: {
@@ -18,6 +18,7 @@ interface CableAppProps {
       }
     ) => Channel;
   };
+  unsubscribe?: () => void;
 }
 
 // Create a context for the ActionCable provider
@@ -28,7 +29,7 @@ const ActionCableProvider = ({ children }: { children: ReactNode }) => {
   // Use the session to get the user's access token
   const { data: session } = useSession();
   // State to store the cable app
-  const [CableApp, setCableApp] = useState<CableAppProps>({ cable: undefined });
+  const [CableApp, setCableApp] = useState<CableAppProps>({});
 
   // Async function to load the ActionCable consumer
   const loadConsumer = async () => {
