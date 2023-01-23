@@ -32,7 +32,11 @@ const ConversationDetailPage: NextPage = ({
 
   return (
     <section>
-      <ChatRoom conversation={conversation} user={session?.user} />
+      <ChatRoom
+        conversation={conversation}
+        history={messages}
+        user={session?.user}
+      />
     </section>
   );
 };
@@ -68,7 +72,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     return { props: { conversation, messages } };
   }
 
-  return { props: { conversation: null } };
+  return { props: { conversation: null, messages: [] } };
 };
 
 export default ConversationDetailPage;

@@ -1,20 +1,26 @@
-// ChatRoom.tsx
-
 import { useState } from "react";
+
+// Hooks
 import useActionCable from "@/lib/actioncable/hooks/useActionCable";
+
+// Components
 import Message from "./message";
+
+// Types
 import type { UserAPI } from "@/types/auth";
-import type { Message as MessageType } from "@/types/actioncable";
+import type {
+  Conversation,
+  Message as MessageType,
+} from "@/types/conversations";
 
 interface Props {
-  conversation: {
-    id: string;
-  };
+  conversation: Conversation;
   user?: UserAPI;
+  history?: MessageType[];
 }
 
-const ChatRoom = ({ conversation, user }: Props) => {
-  const [messages, setMessages] = useState<MessageType[]>([]);
+const ChatRoom = ({ conversation, user, history }: Props) => {
+  const [messages, setMessages] = useState<MessageType[]>(history || []);
   const [currentMessage, setCurrentMessage] = useState("");
 
   const channel = useActionCable(
