@@ -42,7 +42,6 @@ const ActionCableProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     if (
       typeof window !== "undefined" &&
-      session?.user &&
       session?.user?.accessToken &&
       CableApp.cable === undefined
     ) {

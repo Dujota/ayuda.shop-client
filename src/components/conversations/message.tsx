@@ -12,7 +12,7 @@ interface Props {
 const Message = ({ message, user }: Props) => {
   return (
     <div>
-      {message.sender_id === user?.id ? (
+      {message.user_id === user?.id ? (
         <div className="sent message">
           <p>You: {message.content}</p>
         </div>

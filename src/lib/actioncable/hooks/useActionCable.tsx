@@ -15,7 +15,7 @@ const useActionCable = (
   const cable = useContext(ActionCableContext);
 
   useEffect(() => {
-    if (session?.user && session?.user?.accessToken && !channel) {
+    if (session?.user && session?.user?.accessToken && !channel && cable) {
       const newChannel = cable?.subscriptions?.create(
         {
           channel: channelName,
@@ -39,14 +39,25 @@ const useActionCable = (
           },
         }
       );
+
       setChannel(newChannel);
     }
     return () => {
       if (channel) {
         channel.unsubscribe();
+        ``;
       }
     };
-  }, [channelName, channelId, session]);
+  }, [
+    channelName,
+    channelId,
+    session,
+    cable,
+    channel,
+    onReceive,
+    onConnect,
+    onDisconnect,
+  ]);
 
   return channel as Channel;
 };
