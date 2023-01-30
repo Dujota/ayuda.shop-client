@@ -8,6 +8,8 @@ import { SessionProvider } from "next-auth/react";
 import "../styles/globals.css";
 import Layout from "@/components/common/layout/layout";
 import { ActionCableProvider } from "@/lib/actioncable/provider";
+import { StateMachineProvider, createStore } from "little-state-machine";
+import LSMProvider from "@/components/providers/state-machine";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -16,9 +18,11 @@ const MyApp: AppType<{ session: Session | null }> = ({
   const getLayout = Component.getLayout ?? ((page) => page);
   return (
     <SessionProvider session={session}>
-      <ActionCableProvider>
-        <Layout>{getLayout(<Component {...pageProps} />)}</Layout>
-      </ActionCableProvider>
+      <LSMProvider>
+        <ActionCableProvider>
+          <Layout>{getLayout(<Component {...pageProps} />)}</Layout>
+        </ActionCableProvider>
+      </LSMProvider>
     </SessionProvider>
   );
 };

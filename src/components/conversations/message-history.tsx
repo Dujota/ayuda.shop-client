@@ -5,14 +5,14 @@ import Message from "./message";
 
 // Types
 import type { UserAPI } from "@/types/auth";
-import type { Message as MessageType } from "@/types/actioncable";
+import type { Message as MessageType } from "@/types/conversations";
 
 interface Props {
   messages: MessageType[];
   user?: UserAPI;
 }
 
-const Messages = ({ messages, user }: Props) => {
+const MessageHistory = ({ messages, user }: Props) => {
   return (
     <div>
       {messages.map((message, index) => (
@@ -22,4 +22,4 @@ const Messages = ({ messages, user }: Props) => {
   );
 };
 
-export default memo(Messages);
+export default memo(MessageHistory);
