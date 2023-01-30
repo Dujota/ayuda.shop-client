@@ -24,8 +24,11 @@ const ChatRoom = ({ conversation, user, history }: Props) => {
   const [currentMessage, setCurrentMessage] = useState("");
 
   const channel = useActionCable(
-    "ConversationRoomChannel",
-    conversation.id,
+    {
+      channel: "ConversationsChannel",
+      conversation_id: conversation.id,
+      sender_id: user?.id,
+    },
     (data) => {
       handleReceivedData(data);
     }

@@ -4,8 +4,11 @@ import { useSession } from "next-auth/react";
 import { ActionCableContext } from "../provider";
 
 const useActionCable = (
-  channelName: string,
-  channelId: string | number,
+  options: {
+    channel: string;
+    conversation_id?: number | string;
+    sender_id: number | string;
+  },
   onReceive: (data: any) => void,
   onConnect?: () => void,
   onDisconnect?: () => void
@@ -16,29 +19,23 @@ const useActionCable = (
 
   useEffect(() => {
     if (session?.user && session?.user?.accessToken && !channel && cable) {
-      const newChannel = cable?.subscriptions?.create(
-        {
-          channel: channelName,
-          id: channelId,
+      const newChannel = cable?.subscriptions?.create(options, {
+        connected: () => {
+          console.log(`${options?.channel} connected!`);
+          if (typeof onConnect === "function") {
+            onConnect();
+          }
         },
-        {
-          connected: () => {
-            console.log(`${channelName} connected!`);
-            if (typeof onConnect === "function") {
-              onConnect();
-            }
-          },
-          disconnected: () => {
-            console.log(`${channelName} disconnected!`);
-            if (typeof onDisconnect === "function") {
-              onDisconnect();
-            }
-          },
-          received: (data: any) => {
-            onReceive(data);
-          },
-        }
-      );
+        disconnected: () => {
+          console.log(`${options?.channel} disconnected!`);
+          if (typeof onDisconnect === "function") {
+            onDisconnect();
+          }
+        },
+        received: (data: any) => {
+          onReceive(data);
+        },
+      });
 
       setChannel(newChannel);
     }
@@ -48,16 +45,7 @@ const useActionCable = (
         ``;
       }
     };
-  }, [
-    channelName,
-    channelId,
-    session,
-    cable,
-    channel,
-    onReceive,
-    onConnect,
-    onDisconnect,
-  ]);
+  }, [options, session, cable, channel, onReceive, onConnect, onDisconnect]);
 
   return channel as Channel;
 };
