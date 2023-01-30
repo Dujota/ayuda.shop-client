@@ -6,7 +6,6 @@ export default function useMount() {
     setMounted(true);
 
     return () => {
-      debugger;
       setMounted(false);
     };
   }, []);
