@@ -2,6 +2,7 @@ import type { Channel } from "@/types/actioncable";
 import { useContext, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { ActionCableContext } from "../provider";
+import useMount from "@/lib/hooks/useMount";
 
 const useActionCable = (
   options: {
@@ -11,14 +12,31 @@ const useActionCable = (
   },
   onReceive: (data: any) => void,
   onConnect?: () => void,
-  onDisconnect?: () => void
+  onDisconnect?: () => void,
+  keepAlive = false
 ): Channel => {
   const { data: session } = useSession();
   const [channel, setChannel] = useState<Channel | undefined>();
   const cable = useContext(ActionCableContext);
+  const mounted = useMount();
+
+  // cleanup
+  useEffect(() => {
+    return () => {
+      if (channel && !keepAlive) {
+        channel.unsubscribe();
+      }
+    };
+  }, [channel]);
 
   useEffect(() => {
-    if (session?.user && session?.user?.accessToken && !channel && cable) {
+    if (
+      session?.user &&
+      session?.user?.accessToken &&
+      !channel &&
+      cable &&
+      mounted
+    ) {
       const newChannel = cable?.subscriptions?.create(options, {
         connected: () => {
           console.log(`${options?.channel} connected!`);
@@ -39,13 +57,16 @@ const useActionCable = (
 
       setChannel(newChannel);
     }
-    return () => {
-      if (channel) {
-        channel.unsubscribe();
-        ``;
-      }
-    };
-  }, [options, session, cable, channel, onReceive, onConnect, onDisconnect]);
+  }, [
+    mounted,
+    options,
+    session,
+    cable,
+    channel,
+    onReceive,
+    onConnect,
+    onDisconnect,
+  ]);
 
   return channel as Channel;
 };

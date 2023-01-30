@@ -6,12 +6,23 @@ import GuestSignin from "@/components/common/pages/guest-signin";
 import { getOne } from "@/lib/conversations/queries";
 import { getServerAuthSession } from "@/server/common/get-server-auth-session";
 
+// Actions
+import {
+  addMessage,
+  updateMessages,
+} from "@/lib/state-machine/mutations/conversations";
+
 // Hooks
+import { useEffect } from "react";
 import { useSession } from "next-auth/react";
+import { useStateMachine } from "little-state-machine";
+import useActionCable from "@/lib/actioncable/hooks/useActionCable";
 
 // Types
 import type { NextPage, GetServerSideProps } from "next";
-import type { Conversation, ConversationResponse } from "@/types/conversations";
+import type { ConversationResponse, Message } from "@/types/conversations";
+
+// Components
 import ChatRoom from "@/components/conversations/chat-room";
 
 const ConversationDetailPage: NextPage = ({
@@ -19,6 +30,27 @@ const ConversationDetailPage: NextPage = ({
   messages,
 }: ConversationResponse) => {
   const { data: session, status } = useSession();
+  const { actions } = useStateMachine({ addMessage, updateMessages });
+  const channel = useActionCable(
+    {
+      channel: "ConversationsChannel",
+      conversation_id: conversation?.id,
+      sender_id: session?.user?.id,
+    },
+    (data) => {
+      handleReceivedData(data);
+    }
+  );
+
+  useEffect(() => {
+    if (actions) {
+      actions.updateMessages(messages);
+    }
+  }, []);
+
+  const handleReceivedData = ({ message }: { message: Message }) => {
+    actions.addMessage(message);
+  };
 
   if (status === "loading") {
     return <PageLoader />;
@@ -33,6 +65,7 @@ const ConversationDetailPage: NextPage = ({
   return (
     <section>
       <ChatRoom
+        channel={channel}
         conversation={conversation}
         history={messages}
         user={session?.user}

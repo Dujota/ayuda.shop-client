@@ -10,7 +10,7 @@ interface CableAppProps {
   // i need the typing for  cable?.subscriptions?.create(
   subscriptions?: {
     create: (
-      arg0: { channel: string; id: string | number },
+      arg0: { channel: string },
       arg1: {
         connected: () => void;
         disconnected: () => void;

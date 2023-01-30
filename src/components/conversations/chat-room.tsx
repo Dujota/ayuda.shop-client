@@ -1,59 +1,50 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
+// Actions
+import { updateMessages } from "@/lib/state-machine/mutations/conversations";
 // Hooks
-import useActionCable from "@/lib/actioncable/hooks/useActionCable";
-
+import { useStateMachine } from "little-state-machine";
 // Components
 import Message from "./message";
-
 // Types
 import type { UserAPI } from "@/types/auth";
 import type {
   Conversation,
   Message as MessageType,
 } from "@/types/conversations";
-import message from "./message";
+import type { Channel } from "@/types/actioncable";
+import MessageHistory from "./message-history";
 
 interface Props {
   conversation: Conversation;
   user?: UserAPI;
   history?: MessageType[];
+  channel?: Channel;
 }
 
-const ChatRoom = ({ conversation, user, history }: Props) => {
-  const [messages, setMessages] = useState<MessageType[]>(history || []);
-  const [currentMessage, setCurrentMessage] = useState("");
-
-  const channel = useActionCable(
-    {
-      channel: "ConversationsChannel",
-      conversation_id: conversation.id,
-      sender_id: user?.id,
+const ChatRoom = ({ user, channel }: Props) => {
+  const {
+    state: {
+      conversations: { messages },
     },
-    (data) => {
-      handleReceivedData(data);
-    }
-  );
+  } = useStateMachine();
 
-  const handleReceivedData = ({ message }: { message: MessageType }) => {
-    setMessages((messages) => [...messages, message]);
-  };
+  const [currentMessage, setCurrentMessage] = useState("");
 
   const handleSendMessage = () => {
     // TODO: keep send or do a network request?
-    channel.send({ message: currentMessage });
+    channel?.send({ message: currentMessage });
     setCurrentMessage("");
   };
 
   return (
     <div>
       <div>
-        {messages.map((message, index) => (
-          <Message key={index} message={message} user={user} />
-        ))}
+        <MessageHistory messages={messages} user={user} />
       </div>
       <div>
         <input
+          disabled={!channel}
           value={currentMessage}
           onChange={(e) => setCurrentMessage(e.target.value)}
         />
