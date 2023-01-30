@@ -12,6 +12,7 @@ import { useSession } from "next-auth/react";
 // Types
 import type { NextPage, GetServerSideProps } from "next";
 import type { Conversation, ConversationResponse } from "@/types/conversations";
+import ChatRoom from "@/components/conversations/chat-room";
 
 const ConversationDetailPage: NextPage = ({
   conversation,
@@ -31,14 +32,11 @@ const ConversationDetailPage: NextPage = ({
 
   return (
     <section>
-      <h1>{conversation.id}</h1>
-      <ul>
-        {messages?.map((message) => (
-          <li key={message.id}>
-            <p>{message.content}</p>
-          </li>
-        ))}
-      </ul>
+      <ChatRoom
+        conversation={conversation}
+        history={messages}
+        user={session?.user}
+      />
     </section>
   );
 };
@@ -74,7 +72,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     return { props: { conversation, messages } };
   }
 
-  return { props: { conversation: null } };
+  return { props: { conversation: null, messages: [] } };
 };
 
 export default ConversationDetailPage;
