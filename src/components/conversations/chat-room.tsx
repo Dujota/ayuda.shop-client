@@ -12,6 +12,7 @@ import type {
   Conversation,
   Message as MessageType,
 } from "@/types/conversations";
+import message from "./message";
 
 interface Props {
   conversation: Conversation;
@@ -34,11 +35,12 @@ const ChatRoom = ({ conversation, user, history }: Props) => {
     }
   );
 
-  const handleReceivedData = (msg: MessageType) => {
-    setMessages((messages) => [...messages, msg]);
+  const handleReceivedData = ({ message }: { message: MessageType }) => {
+    setMessages((messages) => [...messages, message]);
   };
 
   const handleSendMessage = () => {
+    // TODO: keep send or do a network request?
     channel.send({ message: currentMessage });
     setCurrentMessage("");
   };
