@@ -8,8 +8,8 @@ import { SessionProvider } from "next-auth/react";
 import "../styles/globals.css";
 import Layout from "@/components/common/layout/layout";
 import { ActionCableProvider } from "@/lib/actioncable/provider";
-import { StateMachineProvider, createStore } from "little-state-machine";
 import LSMProvider from "@/components/providers/state-machine";
+import StyledComponentsProvider from "@/components/providers/styled-components";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -20,7 +20,9 @@ const MyApp: AppType<{ session: Session | null }> = ({
     <SessionProvider session={session}>
       <LSMProvider>
         <ActionCableProvider>
-          <Layout>{getLayout(<Component {...pageProps} />)}</Layout>
+          <StyledComponentsProvider>
+            <Layout>{getLayout(<Component {...pageProps} />)}</Layout>
+          </StyledComponentsProvider>
         </ActionCableProvider>
       </LSMProvider>
     </SessionProvider>
