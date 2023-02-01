@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@rails/actioncable": "^7.0.4-1",
+    "@types/styled-components": "^5.1.26",
     "axios": "^1.2.1",
     "date-fns": "^2.29.3",
     "little-state-machine": "^4.8.0",
@@ -18,6 +19,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.41.1",
+    "styled-components": "^5.3.6",
     "zod": "^3.18.0"
   },
   "devDependencies": {
