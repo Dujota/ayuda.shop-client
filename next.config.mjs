@@ -16,5 +16,11 @@ const config = {
   compiler: {
     styledComponents: true,
   },
+  images: {
+    remotePatterns: [
+      { hostname: "cdn.sanity.io" },
+      { hostname: "source.unsplash.com" },
+    ],
+  },
 };
 export default config;
