@@ -1,7 +1,12 @@
 import { type NextPage } from "next";
+import Layout from "@/components/common/layout/layout";
 
 const BlogLandingPage: NextPage = (pageProps) => {
-  return <div>Blog Landing PAge</div>;
+  return (
+    <Layout>
+      <div>Blog Landing PAge</div>
+    </Layout>
+  );
 };
 
 export default BlogLandingPage;

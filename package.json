@@ -16,6 +16,7 @@
     "@types/styled-components": "^5.1.26",
     "axios": "^1.2.1",
     "date-fns": "^2.29.3",
+    "intl-segmenter-polyfill": "^0.4.4",
     "little-state-machine": "^4.8.0",
     "next": "13.0.2",
     "next-auth": "^4.18.3",
@@ -25,6 +26,7 @@
     "react-hook-form": "^7.41.1",
     "sanity": "^3.0.0",
     "styled-components": "^5.3.6",
+    "suspend-react": "^0.0.9",
     "swr": "^2.0.3",
     "zod": "^3.18.0"
   },
@@ -48,5 +50,8 @@
   },
   "ct3aMetadata": {
     "initVersion": "6.11.4"
+  },
+  "engines": {
+    "node": ">=16"
   }
 }

@@ -14,7 +14,7 @@ import { useSession } from "next-auth/react";
 
 // Components
 import Link from "next/link";
-
+import Layout from "@/components/common/layout/layout";
 import Title from "@/components/common/pages/title";
 import PageLoader from "@/components/common/loaders/page-loader";
 import GuestSignin from "@/components/common/pages/guest-signin";
@@ -34,21 +34,27 @@ const ConversationsDashboard: NextPage = ({
     );
 
   if (status === "unauthenticated") {
-    return <GuestSignin />;
+    return (
+      <Layout>
+        <GuestSignin />;
+      </Layout>
+    );
   }
   return (
-    <div>
-      <Title>All My Conversations</Title>
-      <ul>
-        {conversations.map((conversation) => (
-          <li key={conversation.id}>
-            <Link href={`/conversations/${conversation.id}`}>
-              Link to Conversation # {conversation.id}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <Layout>
+      <div>
+        <Title>All My Conversations</Title>
+        <ul>
+          {conversations.map((conversation) => (
+            <li key={conversation.id}>
+              <Link href={`/conversations/${conversation.id}`}>
+                Link to Conversation # {conversation.id}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </Layout>
   );
 };
 

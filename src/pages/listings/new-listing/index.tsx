@@ -10,6 +10,7 @@ import type { GetServerSideProps, NextPage } from "next";
 import { useSession } from "next-auth/react";
 import { getServerAuthSession } from "@/server/common/get-server-auth-session";
 import NewListingForm from "@/components/listings/new-listing-form";
+import Layout from "@/components/common/layout/layout";
 
 const NewListing: NextPage = ({ types }: ListingTypeIndexProps) => {
   const { data: session, status } = useSession();
@@ -19,14 +20,20 @@ const NewListing: NextPage = ({ types }: ListingTypeIndexProps) => {
   }
 
   if (status === "unauthenticated") {
-    return <GuestSignin />;
+    return (
+      <Layout>
+        <GuestSignin />;
+      </Layout>
+    );
   }
 
   return (
-    <section>
-      <h1>Publish a new listing</h1>
-      <NewListingForm types={types} />
-    </section>
+    <Layout>
+      <section>
+        <h1>Publish a new listing</h1>
+        <NewListingForm types={types} />
+      </section>
+    </Layout>
   );
 };
 

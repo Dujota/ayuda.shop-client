@@ -4,12 +4,11 @@ import type { AppPropsWithLayout } from "@/types/pages";
 
 // Providers
 import { SessionProvider } from "next-auth/react";
-
-import "../styles/globals.css";
-import Layout from "@/components/common/layout/layout";
 import { ActionCableProvider } from "@/lib/actioncable/provider";
 import LSMProvider from "@/components/providers/state-machine";
 import StyledComponentsProvider from "@/components/providers/styled-components";
+
+import "../styles/globals.css";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -21,7 +20,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
       <LSMProvider>
         <ActionCableProvider>
           <StyledComponentsProvider>
-            <Layout>{getLayout(<Component {...pageProps} />)}</Layout>
+            {getLayout(<Component {...pageProps} />)}
           </StyledComponentsProvider>
         </ActionCableProvider>
       </LSMProvider>
