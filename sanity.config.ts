@@ -6,7 +6,7 @@ import { projectId, dataset } from "@/lib/sanity/sanity.api";
 
 export default defineConfig({
   name: "Ayuda_Content_Studio",
-  title: "Ayuda_Content_Studio",
+  title: "Ayuda Content Studio",
   basePath: "/studio",
   projectId,
   dataset,
