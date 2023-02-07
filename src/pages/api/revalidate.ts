@@ -54,7 +54,7 @@ export default async function revalidate(
     const updatedRoutes = `Updated routes: ${staleRoutes.join(", ")}`;
     console.log(updatedRoutes);
     return res.status(200).send(updatedRoutes);
-  } catch (err) {
+  } catch (err: any) {
     console.error(err);
     return res.status(500).send(err.message);
   }

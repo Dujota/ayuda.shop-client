@@ -2,7 +2,12 @@ import { defineConfig } from "sanity";
 import { deskTool } from "sanity/desk";
 import { visionTool } from "@sanity/vision";
 import { schemaTypes } from "@/lib/sanity/schemas";
-import { projectId, dataset } from "@/lib/sanity/sanity.api";
+import {
+  projectId,
+  dataset,
+  apiVersion,
+  previewSecretId,
+} from "@/lib/sanity/sanity.api";
 
 export default defineConfig({
   name: "Ayuda_Content_Studio",
