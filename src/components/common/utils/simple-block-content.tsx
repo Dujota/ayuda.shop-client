@@ -1,15 +1,14 @@
-import type { PortableTextComponents } from "@portabletext/react";
+import type { PortableTextReactComponents } from "@portabletext/react";
 import { PortableText } from "@portabletext/react";
 import EmbedHTML from "./embed-html";
-import Figure from "./Figure";
+import Figure from "@/common/images/figure";
 
 interface SimpleBlockContentProps {
   blocks: any[];
 }
 
-const components: PortableTextComponents = {
+const components: PortableTextReactComponents = {
   types: {
-    // @ts-ignore TODO: look into this type issue
     embedHTML: EmbedHTML,
     figure: Figure,
   },

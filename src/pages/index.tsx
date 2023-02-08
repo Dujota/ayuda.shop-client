@@ -1,20 +1,40 @@
 import Layout from "@/components/common/layout/layout";
+import RenderSections from "@/components/sanity/render-sections";
+
 import { type NextPage } from "next";
+
 import Head from "next/head";
 
-const Home: NextPage = () => {
+const Home: NextPage = (props) => {
+  const {
+    title = "Missing title",
+    description,
+    disallowRobots,
+    openGraphImage,
+    content = [],
+    config = {},
+    slug,
+  } = props;
+
   return (
     <>
       <Head>
-        <title>Ayuda me</title>
+        <link rel="icon" href="/favicon.ico" />
         <meta
           name="description"
           content="Find the help you need for a project!"
         />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Layout>
+      <Layout
+        title={title}
+        config={config}
+        description={description}
+        slug={slug}
+        disallowRobots={disallowRobots}
+        openGraphImage={openGraphImage}
+      >
         <div>Home Page</div>
+        {content && <RenderSections sections={content} />}
       </Layout>
     </>
   );
