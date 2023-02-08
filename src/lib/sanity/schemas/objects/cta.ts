@@ -1,6 +1,9 @@
 /* eslint-disable prettier/prettier */
+
+import { defineField, defineType } from "sanity";
+
 // eslint-disable-next-line import/no-anonymous-default-export
-export default {
+export default defineType({
   title: "Call to action",
   name: "cta",
   type: "object",
@@ -16,25 +19,25 @@ export default {
     },
   ],
   fields: [
-    {
+    defineField({
       title: "Title",
       name: "title",
       type: "string",
-    },
-    {
+    }),
+    defineField({
       title: "Internal link",
       description: "Use this to link between pages on the website",
       name: "route",
       type: "reference",
       to: [{ type: "route" }],
       fieldset: "link",
-    },
-    {
+    }),
+    defineField({
       title: "External link",
       name: "link",
       type: "url",
       fieldset: "link",
-    },
+    }),
   ],
   preview: {
     select: {
@@ -55,4 +58,4 @@ export default {
       };
     },
   },
-};
+});

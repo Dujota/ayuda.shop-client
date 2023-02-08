@@ -10,8 +10,8 @@ import {
 } from "@/lib/sanity/sanity.api";
 
 export default defineConfig({
-  name: "Ayuda_Content_Studio",
   title: "Ayuda Content Studio",
+  name: "Ayuda_Content_Studio",
   basePath: "/studio",
   projectId,
   dataset,
@@ -20,5 +20,24 @@ export default defineConfig({
   // Schemas
   schema: {
     types: schemaTypes,
+  },
+  document: {
+    newDocumentOptions: (prev, { creationContext }) => {
+      if (creationContext.type === "global") {
+        return prev.filter(
+          (templateItem) => templateItem.templateId != "site-config"
+        );
+      }
+      return prev;
+    },
+    actions: (prev, { schemaType }) => {
+      console.log("schemaType", schemaType);
+      if (schemaType === "site-config") {
+        return prev.filter(
+          ({ action }) => !["unpublish", "delete", "duplicate"].includes(action)
+        );
+      }
+      return prev;
+    },
   },
 });

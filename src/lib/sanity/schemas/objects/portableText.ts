@@ -1,5 +1,7 @@
+import { defineType } from "sanity";
+
 // eslint-disable-next-line import/no-anonymous-default-export
-export default {
+export default defineType({
   title: "Portable Text",
   name: "portableText",
   type: "array",
@@ -26,4 +28,4 @@ export default {
     { type: "figure" },
     { type: "embedHTML" },
   ],
-};
+});

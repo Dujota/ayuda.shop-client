@@ -2,7 +2,7 @@
 import page from "./documents/page";
 import route from "./documents/route";
 import siteConfig from "./documents/siteConfig";
-import settings from "./documents/settings";
+import settings from "./documents/settings"; // TODO: incorporate this into siteconfig
 
 // Object types
 import cta from "./objects/cta";

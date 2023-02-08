@@ -1,7 +1,7 @@
 import { MasterDetailIcon } from "@sanity/icons";
+import { defineField, defineType } from "sanity";
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default {
+export default defineType({
   name: "page",
   type: "document",
   title: "Page",
@@ -13,12 +13,12 @@ export default {
     },
   ],
   fields: [
-    {
+    defineField({
       name: "title",
       type: "string",
       title: "Title",
-    },
-    {
+    }),
+    defineField({
       name: "content",
       type: "array",
       title: "Page sections",
@@ -28,21 +28,21 @@ export default {
         { type: "mailchimp" },
         { type: "textSection" },
       ],
-    },
-    {
+    }),
+    defineField({
       name: "description",
       type: "text",
       title: "Description",
       description: "This description populates meta-tags on the webpage",
       fieldset: "metadata",
-    },
-    {
+    }),
+    defineField({
       name: "openGraphImage",
       type: "image",
       title: "Open Graph Image",
       description: "Image for sharing previews on Facebook, Twitter etc.",
       fieldset: "metadata",
-    },
+    }),
   ],
 
   preview: {
@@ -51,4 +51,4 @@ export default {
       media: "openGraphImage",
     },
   },
-};
+});

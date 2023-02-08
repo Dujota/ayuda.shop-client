@@ -1,17 +1,12 @@
-import type { ReactNode } from "react";
-import React from "react";
-
-const LinkRender = ({ children }: { children: ReactNode }) => (
-  <span>{children} 🌍</span>
-);
+import { defineField, defineType } from "sanity";
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default {
+export default defineType({
   title: "URL",
   name: "link",
   type: "object",
   fields: [
-    {
+    defineField({
       title: "URL",
       name: "href",
       type: "url",
@@ -20,10 +15,6 @@ export default {
           allowRelative: true,
           scheme: ["https", "http", "mailto", "tel"],
         }),
-    },
+    }),
   ],
-  blockEditor: {
-    icon: () => "🌍",
-    render: LinkRender,
-  },
-};
+});
