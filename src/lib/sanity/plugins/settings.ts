@@ -41,7 +41,7 @@ export const settingsStructure = (
     // The `Settings` root list item
     const settingsListItem = // A singleton not using `documentListItem`, eg no built-in preview
       S.listItem()
-        .title(typeDef.title)
+        .title(typeDef.title || "missing title")
         .icon(typeDef.icon)
         .child(
           S.editor()

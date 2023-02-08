@@ -1,4 +1,4 @@
-import { defineField, defineType } from "sanity";
+import { defineArrayMember, defineField, defineType } from "sanity";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default defineType({
@@ -29,10 +29,10 @@ export default defineType({
       type: "array",
       title: "Call to actions",
       of: [
-        {
+        defineArrayMember({
           title: "Call to action",
           type: "cta",
-        },
+        }),
       ],
     }),
   ],

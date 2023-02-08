@@ -1,12 +1,17 @@
 import * as bcp47 from "bcp-47";
-import { defineField, defineType } from "sanity";
+import { defineArrayMember, defineField, defineType } from "sanity";
+import { CogIcon } from "@sanity/icons";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default defineType({
   name: "site-config",
   type: "document",
   title: "Site configuration",
+  icon: CogIcon,
   fieldsets: [{ name: "footer", title: "Footer" }],
+  preview: { select: { title: "title", subtitle: "description" } },
+  // Uncomment below to have edits publish automatically as you type
+  // liveEdit: true,
   fields: [
     defineField({
       name: "title",
@@ -61,10 +66,10 @@ export default defineType({
       ],
       type: "array",
       of: [
-        {
+        defineArrayMember({
           type: "reference",
           to: [{ type: "route" }],
-        },
+        }),
       ],
     }),
     defineField({
@@ -77,10 +82,10 @@ export default defineType({
       ],
       fieldset: "footer",
       of: [
-        {
+        defineArrayMember({
           type: "reference",
           to: [{ type: "route" }],
-        },
+        }),
       ],
     }),
     defineField({

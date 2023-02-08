@@ -2,7 +2,7 @@ import React from "react";
 import { defineField, defineType } from "sanity";
 
 const HTMLpreview = (props: any) => (
-  <div dangerouslySetInnerHTML={{ __html: props?.value.html }} />
+  <div dangerouslySetInnerHTML={{ __html: props?.value?.html }} />
 );
 
 // eslint-disable-next-line import/no-anonymous-default-export

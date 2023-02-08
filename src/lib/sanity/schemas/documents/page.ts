@@ -1,5 +1,5 @@
 import { MasterDetailIcon } from "@sanity/icons";
-import { defineField, defineType } from "sanity";
+import { defineArrayMember, defineField, defineType } from "sanity";
 
 export default defineType({
   name: "page",
@@ -23,10 +23,10 @@ export default defineType({
       type: "array",
       title: "Page sections",
       of: [
-        { type: "hero" },
-        { type: "imageSection" },
-        { type: "mailchimp" },
-        { type: "textSection" },
+        defineArrayMember({ type: "hero" }),
+        defineArrayMember({ type: "imageSection" }),
+        defineArrayMember({ type: "mailchimp" }),
+        defineArrayMember({ type: "textSection" }),
       ],
     }),
     defineField({

@@ -1,4 +1,4 @@
-import { defineType } from "sanity";
+import { defineArrayMember, defineType } from "sanity";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default defineType({
@@ -6,7 +6,7 @@ export default defineType({
   name: "portableText",
   type: "array",
   of: [
-    {
+    defineArrayMember({
       type: "block",
       styles: [
         { title: "Normal", value: "normal" },
@@ -24,8 +24,8 @@ export default defineType({
         ],
         annotations: [{ type: "link" }, { type: "internalLink" }],
       },
-    },
-    { type: "figure" },
-    { type: "embedHTML" },
+    }),
+    defineArrayMember({ type: "figure" }),
+    defineArrayMember({ type: "embedHTML" }),
   ],
 });
