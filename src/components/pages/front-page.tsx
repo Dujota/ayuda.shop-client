@@ -15,8 +15,7 @@ export default function FrontPage({
     return <PageLoader />;
   }
 
-  const { title, description, slug, disallowRobots, openGraphImage, content } =
-    page;
+  const { title, description, slug, url, openGraphImage, content } = page;
   return (
     <>
       <Head>
@@ -31,7 +30,7 @@ export default function FrontPage({
         settings={settings}
         description={description}
         slug={slug}
-        disallowRobots={disallowRobots}
+        disallowRobots={url.disallowRobots}
         openGraphImage={openGraphImage}
       >
         <div>Home Page</div>

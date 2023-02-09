@@ -14,8 +14,7 @@ export default function BlogLandingPage({
   if (loading) {
     return <PageLoader />;
   }
-  const { title, description, slug, disallowRobots, openGraphImage, content } =
-    page;
+  const { title, description, slug, url, openGraphImage, content } = page;
   return (
     <>
       <Head>
@@ -29,8 +28,8 @@ export default function BlogLandingPage({
         title={page.title}
         settings={settings}
         description={page.description}
-        slug={page.slug}
-        disallowRobots={disallowRobots}
+        slug={url.slug.current || "/blog"}
+        disallowRobots={url.disallowRobots}
         openGraphImage={openGraphImage}
       >
         <div>Home Page</div>

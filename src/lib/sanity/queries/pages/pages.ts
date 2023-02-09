@@ -6,7 +6,7 @@ export async function getFrontPage(): Promise<any> {
   if (client) {
     const res = await client.fetch(homePageQuery);
 
-    return res?.frontpage ? { ...res.frontpage, slug: "frontpage" } : null;
+    return res?.frontpage ? { ...res.frontpage, slug: "" } : null;
   }
 
   return null;
