@@ -2,7 +2,7 @@ import { defineConfig } from "sanity";
 import { deskTool } from "sanity/desk";
 import { visionTool } from "@sanity/vision";
 import { schemaTypes } from "@/lib/sanity/schemas";
-import siteConfig from "@/lib/sanity/schemas/documents/siteConfig";
+import siteConfig from "@/lib/sanity/schemas/documents/site-config";
 
 import {
   projectId,

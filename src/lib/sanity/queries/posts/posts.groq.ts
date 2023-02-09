@@ -1,5 +1,21 @@
 import { groq } from "next-sanity";
 
+export interface Post {
+  _id: string;
+  title?: string;
+  coverImage?: any;
+  date?: string;
+  excerpt?: string;
+  author?: Author;
+  slug?: string;
+  content?: any;
+}
+
+export interface Author {
+  name?: string;
+  picture?: any;
+}
+
 export const postFields = groq`
   _id,
   title,
@@ -28,27 +44,11 @@ export const postAndMoreStoriesQuery = groq`
 }`;
 
 export const postSlugsQuery = groq`
-*[_type == "post" && defined(slug.current)][].slug.current
+  *[_type == "post" && defined(slug.current)][].slug.current
 `;
 
 export const postBySlugQuery = groq`
-*[_type == "post" && slug.current == $slug][0] {
-  ${postFields}
-}
+  *[_type == "post" && slug.current == $slug][0] {
+    ${postFields}
+  }
 `;
-
-export interface Post {
-  _id: string;
-  title?: string;
-  coverImage?: any;
-  date?: string;
-  excerpt?: string;
-  author?: Author;
-  slug?: string;
-  content?: any;
-}
-
-export interface Author {
-  name?: string;
-  picture?: any;
-}

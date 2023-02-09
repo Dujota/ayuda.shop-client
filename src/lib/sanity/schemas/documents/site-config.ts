@@ -48,12 +48,12 @@ export default defineType({
       name: "logo",
       type: "image",
       fields: [
-        {
+        defineField({
           name: "alt",
           type: "string",
           title: "Alternative text",
           description: "Important for SEO and accessiblity.",
-        },
+        }),
       ],
     }),
     defineField({

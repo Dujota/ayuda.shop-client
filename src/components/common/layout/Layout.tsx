@@ -2,14 +2,33 @@ import type { ReactNode } from "react";
 import { urlForImage } from "@/lib/sanity/sanity.image";
 import Header from "./header";
 import Footer from "./footer";
-import { NextSeo } from "next-seo";
+import { LogoJsonLd, NextSeo } from "next-seo";
 
 interface Props {
   children: ReactNode;
   title: string;
-  config: {
+  settings: {
     title: string;
     url: string;
+    mainNavigation: {
+      title: string;
+      slug: {
+        current: string;
+      };
+    };
+    footerNavigation: {
+      title: string;
+      slug: {
+        current: string;
+      };
+    };
+    footerText: string;
+    logo?: {
+      asset: {
+        extension: string;
+        url: string;
+      };
+    };
   };
   openGraphImage: {
     url: string;
@@ -25,7 +44,7 @@ interface Props {
 export default function Layout({
   children,
   title,
-  config,
+  settings,
   description,
   slug,
   disallowRobots,
@@ -56,13 +75,16 @@ export default function Layout({
     ]
     : [];
 
+  const { mainNavigation, footerNavigation, footerText, logo, url } = settings;
+  const logoUrl = logo && logo.asset && logo.asset.url;
+
   return (
     <>
       <NextSeo
         title={title}
-        titleTemplate={`%s | ${config.title}`}
+        titleTemplate={`%s | ${settings.title}`}
         description={description}
-        canonical={config.url && `${config.url}/${slug}`}
+        canonical={url && `${url}/${slug}`}
         openGraph={{
           images: openGraphImages,
         }}
@@ -71,6 +93,7 @@ export default function Layout({
       <Header />
       <main>{children}</main>
       <Footer />
+      {logoUrl && url && <LogoJsonLd url={url} logo={logoUrl} />}
     </>
   );
 }

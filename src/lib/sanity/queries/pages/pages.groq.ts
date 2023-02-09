@@ -2,6 +2,13 @@ import { groq } from "next-sanity";
 
 export const pageFragment = groq`
   ...,
+   url -> {
+    disallowRobots,
+    includeInSitemap,
+    slug{
+      current
+    },
+  },
   content[] {
     ...,
     cta {
@@ -16,7 +23,7 @@ export const pageFragment = groq`
 `;
 
 export const homePageQuery = groq`
-  *[_id == "global-config"][0]{
+  *[_id == "site-config"][0]{
     frontpage -> {
       ${pageFragment}
     }

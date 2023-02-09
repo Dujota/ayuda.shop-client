@@ -14,6 +14,12 @@ export default defineType({
   ],
   fields: [
     defineField({
+      name: "url",
+      title: "Route Path for this page",
+      type: "reference",
+      to: { type: "route" },
+    }),
+    defineField({
       name: "title",
       type: "string",
       title: "Title",

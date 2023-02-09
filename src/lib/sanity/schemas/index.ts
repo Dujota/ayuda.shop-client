@@ -1,7 +1,7 @@
 // Document types
 import page from "./documents/page";
 import route from "./documents/route";
-import siteConfig from "./documents/siteConfig";
+import siteConfig from "./documents/site-config";
 import settings from "./documents/settings"; // TODO: incorporate this into siteconfig
 
 // Object types

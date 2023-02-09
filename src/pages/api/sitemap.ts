@@ -1,4 +1,4 @@
-import { sitemapQuery } from "@/lib/sanity/queries/sitemap";
+import { sitemapQuery } from "@/lib/sanity/queries/sitemap/sitemap.groq";
 import { client } from "@/lib/sanity/sanity.client";
 import { slugToAbsUrl } from "@/lib/utils/urls";
 import type { NextApiRequest, NextApiResponse } from "next";
