@@ -14,6 +14,8 @@ const components: any = {
     figure: Figure,
   },
   marks: {
+    // embedHTML: EmbedHTML,
+    // figure: Figure,
     internalLink: InternalLink,
     link: externalLink,
   },
