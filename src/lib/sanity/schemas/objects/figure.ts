@@ -1,7 +1,7 @@
 import { defineField, defineType } from "sanity";
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default defineType({
+export default defineField({
   name: "figure",
   title: "Image",
   type: "image",
@@ -9,17 +9,17 @@ export default defineType({
     hotspot: true,
   },
   fields: [
-    defineField({
+    {
       title: "Caption",
       name: "caption",
       type: "string",
-    }),
-    defineField({
+    },
+    {
       name: "alt",
       type: "string",
       title: "Alternative text",
       description: "Important for SEO and accessiblity.",
-    }),
+    },
   ],
   preview: {
     select: {

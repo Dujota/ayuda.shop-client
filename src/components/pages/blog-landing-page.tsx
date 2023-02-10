@@ -25,14 +25,14 @@ export default function BlogLandingPage({
         />
       </Head>
       <Layout
-        title={page.title}
+        title={title}
         settings={settings}
-        description={page.description}
+        description={description}
         slug={url.slug.current || "/blog"}
         disallowRobots={url.disallowRobots}
         openGraphImage={openGraphImage}
       >
-        <div>Home Page</div>
+        <div>Blog Landing Page</div>
         {content && <RenderSections sections={content} />}
       </Layout>
     </>

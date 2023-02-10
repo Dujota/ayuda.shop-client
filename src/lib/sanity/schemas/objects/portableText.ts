@@ -1,7 +1,7 @@
-import { defineArrayMember, defineType } from "sanity";
+import { defineArrayMember, defineField } from "sanity";
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default defineType({
+export default defineField({
   title: "Portable Text",
   name: "portableText",
   type: "array",
@@ -22,7 +22,10 @@ export default defineType({
           { title: "Emphasis", value: "em" },
           { title: "Code", value: "code" },
         ],
-        annotations: [{ type: "link" }, { type: "internalLink" }],
+        annotations: [
+          { name: "link", type: "link" },
+          { name: "internalLink", type: "internalLink" },
+        ],
       },
     }),
     defineArrayMember({ type: "figure" }),

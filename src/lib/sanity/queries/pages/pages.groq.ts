@@ -1,25 +1,51 @@
 import { groq } from "next-sanity";
 
-export const pageFragment = groq`
-  ...,
-   url -> {
+export const internalLinkFragment = groq`
+  text[]{
+      ...,
+    markDefs[]{
+      ...,
+      _type == "internalLink" => {
+        "internalPage": @.reference->url->slug.current,
+        "internalRoute": @.reference->slug.current
+      }
+    }
+  }
+`;
+
+const pageCtaFragment = groq`
+ cta {
+    ...,
+    route->
+  },
+  ctas[] {
+    ...,
+    route->
+  }
+`;
+
+export const pageContentFragment = groq`
+  content[] {
+    ...,
+    ${pageCtaFragment},
+    ${internalLinkFragment}
+  }
+`;
+
+export const pageUrlFragment = groq`
+ url -> {
     disallowRobots,
     includeInSitemap,
     slug{
       current
     },
-  },
-  content[] {
-    ...,
-    cta {
-      ...,
-      route->
-    },
-    ctas[] {
-      ...,
-      route->
-    }
   }
+`;
+
+export const pageFragment = groq`
+  ...,
+  ${pageUrlFragment},
+  ${pageContentFragment},
 `;
 
 export const homePageQuery = groq`

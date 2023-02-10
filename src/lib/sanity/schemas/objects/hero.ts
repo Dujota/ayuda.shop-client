@@ -6,25 +6,25 @@ export default defineType({
   name: "hero",
   title: "Hero",
   fields: [
-    defineField({
+    {
       name: "heading",
       type: "string",
       title: "Heading",
-    }),
-    defineField({
+    },
+    {
       name: "tagline",
       type: "simplePortableText",
       title: "Tagline",
-    }),
-    defineField({
+    },
+    {
       name: "backgroundImage",
       type: "image",
       title: "Background image",
       options: {
         hotspot: true,
       },
-    }),
-    defineField({
+    },
+    {
       name: "ctas",
       type: "array",
       title: "Call to actions",
@@ -34,7 +34,7 @@ export default defineType({
           type: "cta",
         }),
       ],
-    }),
+    },
   ],
   preview: {
     select: {

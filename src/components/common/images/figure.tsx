@@ -3,7 +3,7 @@ import { urlForImage } from "@/lib/sanity/sanity.image";
 import Image from "next/image";
 
 interface FigureProps {
-  node: {
+  node?: {
     alt?: string;
     caption?: string;
     asset?: {
@@ -13,10 +13,9 @@ interface FigureProps {
 }
 
 export default function Figure({ node }: FigureProps) {
-  const { alt, caption, asset } = node;
-  if (!asset?._ref) {
-    return undefined;
-  }
+  const { alt, caption, asset } = node || {};
+
+  if (!asset?._ref) return undefined;
 
   const imageUrl = urlForImage(node).width(2000).url();
 

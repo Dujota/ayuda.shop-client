@@ -1,13 +1,12 @@
 interface EmbedHTMLProps {
-  node: {
+  node?: {
     html?: string;
   };
 }
 
 export default function EmbedHTML({ node }: EmbedHTMLProps) {
-  const { html } = node;
-  if (!html) {
+  if (!node?.html) {
     return undefined;
   }
-  return <div dangerouslySetInnerHTML={{ __html: html }} />;
+  return <div dangerouslySetInnerHTML={{ __html: node.html }} />;
 }

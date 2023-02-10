@@ -1,16 +1,21 @@
-import type { PortableTextReactComponents } from "@portabletext/react";
 import { PortableText } from "@portabletext/react";
-import EmbedHTML from "./embed-html";
+import EmbedHTML from "../utils/embed-html";
 import Figure from "@/common/images/figure";
+import InternalLink from "@/common/block/marks/internal-link";
+import externalLink from "@/common/block/marks/external-link";
 
 interface SimpleBlockContentProps {
   blocks: any[];
 }
 
-const components: PortableTextReactComponents = {
+const components: any = {
   types: {
     embedHTML: EmbedHTML,
     figure: Figure,
+  },
+  marks: {
+    internalLink: InternalLink,
+    link: externalLink,
   },
 };
 

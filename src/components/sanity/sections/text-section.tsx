@@ -1,4 +1,4 @@
-import SimpleBlockContent from "@/components/common/utils/simple-block-content";
+import SimpleBlockContent from "@/components/common/block/simple-block-content";
 // import styles from "./TextSection.module.css";
 // TODO: check the styles module and add the tailwind classes or make a styled component
 
