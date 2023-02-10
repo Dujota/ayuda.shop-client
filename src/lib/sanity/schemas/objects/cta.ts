@@ -47,11 +47,16 @@ export default defineField({
       link: "link",
     },
     prepare({ title, routeTitle = "", slug, link }: any) {
-      const subtitleExtra = slug
-        ? `Slug:/${slug}/`
-        : link
-          ? `External link: ${link}`
-          : "Not set";
+      let subtitleExtra;
+
+      if (slug) {
+        subtitleExtra = `Slug:${slug}`
+      } else if (link) {
+        subtitleExtra = `External link: ${link}`
+      } else {
+        subtitleExtra = "Not set"
+      }
+
       return {
         title: `${title}`,
         subtitle: `${routeTitle} ${subtitleExtra}`,

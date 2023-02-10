@@ -1,7 +1,7 @@
 import PageLoader from "@/common/loaders/page-loader";
 import Head from "next/head";
 import Layout from "../common/layout/layout";
-import RenderSections from "../sanity/render-sections";
+import RenderSections from "../common/sections/render-sections";
 
 export default function BlogLandingPage({
   posts,

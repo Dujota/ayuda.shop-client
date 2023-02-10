@@ -1,7 +1,6 @@
 // import styles from "./Figure.module.css"; TODO: check the styles module and add the tailwind classes or make a styled component
 import { urlForImage } from "@/lib/sanity/sanity.image";
-import Image from "next/image";
-import SVG from "./svg";
+import RenderImage from "./render-image";
 
 interface FigureProps {
   value?: {
@@ -15,6 +14,11 @@ interface FigureProps {
   isInline?: boolean;
 }
 
+const imageOptions = {
+  width: 500,
+  height: 200,
+};
+
 export default function Figure({ value }: FigureProps) {
   const { alt, caption, asset } = value || {};
 
@@ -24,17 +28,13 @@ export default function Figure({ value }: FigureProps) {
 
   return (
     <figure className="figure-content">
-      {imageUrl.includes("svg") ? (
-        <SVG data={imageUrl} style={{ width: 500, heigh: 200 }} />
-      ) : (
-        <Image
-          src={imageUrl}
-          className="figure-image"
-          alt={alt || "fiure image"}
-          width={500}
-          height={100}
-        />
-      )}
+      <RenderImage
+        src={imageUrl}
+        alt={alt || "figure image"}
+        options={imageOptions}
+        className="figure-image"
+      />
+
       {caption && (
         <figcaption>
           <div className="figure-caption}">

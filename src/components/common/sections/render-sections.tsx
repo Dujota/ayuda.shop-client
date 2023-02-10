@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import * as SectionComponents from "./sections";
+import * as SectionComponents from ".";
 import capitalizeString from "@/lib/utils/capitalizeString";
 
 interface Section {

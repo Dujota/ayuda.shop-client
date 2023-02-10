@@ -1,7 +1,7 @@
 // Components
 import Head from "next/head";
 import Layout from "@/components/common/layout/layout";
-import RenderSections from "@/components/sanity/render-sections";
+import RenderSections from "@/components/common/sections/render-sections";
 import PageLoader from "@/common/loaders/page-loader";
 
 export default function FrontPage({
