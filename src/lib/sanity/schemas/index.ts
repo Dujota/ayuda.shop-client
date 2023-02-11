@@ -17,19 +17,20 @@ import simplePortableText from "./blocks/simplePortableText";
 const blocks = [portableText, simplePortableText];
 
 // Object types
-import cta from "./objects/cta";
-import embedHTML from "./objects/embedHTML";
-import figure from "./objects/figure";
+import callout from "./objects/modules/callout";
+import cta from "./objects/modules/cta";
+import embedHTML from "./objects/modules/embedHTML";
+import figure from "./objects/modules/figure";
 import internalLink from "./objects/internalLink";
 import externalLink from "./objects/externalLink";
 
-const object = [cta, embedHTML, figure, internalLink, externalLink];
+const object = [callout, cta, embedHTML, figure, internalLink, externalLink];
 
-// Landing page sections
-import hero from "./objects/modules/hero";
-import imageSection from "./objects/modules/imageSection";
-import mailchimp from "./objects/modules/mailchimp";
-import textSection from "./objects/modules/textSection";
+// Page Sections
+import hero from "./objects/sections/hero";
+import imageSection from "./objects/sections/imageSection";
+import mailchimp from "./objects/sections/mailchimp";
+import textSection from "./objects/sections/textSection";
 
 const sections = [hero, imageSection, mailchimp, textSection];
 

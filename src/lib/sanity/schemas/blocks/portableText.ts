@@ -8,7 +8,6 @@ export default defineField({
   of: [
     defineArrayMember({
       title: "Block",
-      type: "block",
       styles: [
         { title: "Normal", value: "normal" },
         { title: "H1", value: "h1" },
@@ -26,8 +25,12 @@ export default defineField({
         ],
         annotations,
       },
+      // Paragraphs
+      type: "block",
     }),
-    defineArrayMember({ type: "figure" }),
-    defineArrayMember({ type: "embedHTML" }),
+    // Custom blocks
+    defineArrayMember({ name: "figure", type: "figure" }),
+    defineArrayMember({ name: "embedHTML", type: "embedHTML" }),
+    defineArrayMember({ name: "callout", type: "callout" }),
   ],
 });
