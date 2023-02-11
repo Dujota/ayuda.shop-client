@@ -3,7 +3,7 @@ import { defineField } from "sanity";
 // eslint-disable-next-line import/no-anonymous-default-export
 export default defineField({
   title: "URL",
-  name: "link",
+  name: "externalLink",
   type: "object",
   fields: [
     {
