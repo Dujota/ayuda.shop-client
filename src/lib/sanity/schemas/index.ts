@@ -1,3 +1,14 @@
+// Rich text annotations used in the block content editor
+import annotationLinkEmail from "./annotations/linkEmail";
+// import annotationLinkExternal from "./annotations/linkExternal";
+// import annotationLinkInternal from "./annotations/linkInternal";
+
+const annotations = [
+  annotationLinkEmail,
+  // annotationLinkExternal,
+  // annotationLinkInternal,
+];
+
 // Document types
 import page from "./documents/page";
 import route from "./documents/route";
@@ -40,4 +51,5 @@ export const schemaTypes = [
   ...object,
   ...blocks,
   ...singletons,
+  ...annotations,
 ];

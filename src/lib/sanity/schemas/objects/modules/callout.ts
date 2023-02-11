@@ -25,7 +25,7 @@ export default defineField({
       name: "links",
       title: "Link",
       type: "array",
-      of: [{ type: "linkInternal" }, { type: "linkExternal" }],
+      of: [{ type: "internalLink" }, { type: "externalLink" }],
       validation: (Rule) => Rule.max(1),
     }),
   ],

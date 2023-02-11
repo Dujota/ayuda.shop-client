@@ -39,7 +39,6 @@ export default defineConfig({
       return prev;
     },
     actions: (prev, { schemaType }) => {
-      console.log("schemaType", schemaType);
       if (schemaType === "site-config") {
         return prev.filter(
           ({ action }: any) =>

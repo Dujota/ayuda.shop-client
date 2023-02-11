@@ -52,30 +52,31 @@ export default function Layout({
 }: Props) {
   const openGraphImages = openGraphImage
     ? [
-      {
-        url: urlForImage(openGraphImage).width(800).height(600).url(),
-        width: 800,
-        height: 600,
-        alt: title,
-      },
-      {
-        // Facebook recommended size
-        url: urlForImage(openGraphImage).width(1200).height(630).url(),
-        width: 1200,
-        height: 630,
-        alt: title,
-      },
-      {
-        // Square 1:1
-        url: urlForImage(openGraphImage).width(600).height(600).url(),
-        width: 600,
-        height: 600,
-        alt: title,
-      },
-    ]
+        {
+          url: urlForImage(openGraphImage).width(800).height(600).url(),
+          width: 800,
+          height: 600,
+          alt: title,
+        },
+        {
+          // Facebook recommended size
+          url: urlForImage(openGraphImage).width(1200).height(630).url(),
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+        {
+          // Square 1:1
+          url: urlForImage(openGraphImage).width(600).height(600).url(),
+          width: 600,
+          height: 600,
+          alt: title,
+        },
+      ]
     : [];
 
-  const { mainNavigation, footerNavigation, footerText, logo, url } = settings;
+  // eslint-disable-next-line prettier/prettier
+  const { mainNavigation, footerNavigation, footerText, logo, url } = settings || {};
   const logoUrl = logo && logo.asset && logo.asset.url;
 
   return (

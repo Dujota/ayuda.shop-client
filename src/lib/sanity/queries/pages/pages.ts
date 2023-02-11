@@ -15,7 +15,7 @@ export async function getFrontPage(): Promise<any> {
 export async function getPageBySlug(slug: string): Promise<any> {
   if (client) {
     const path = slugParamToPath(slug);
-    console.log(getSlugVariations(path));
+
     const res = await client.fetch(pageBySlugQuery, {
       possibleSlugs: getSlugVariations(path),
     });

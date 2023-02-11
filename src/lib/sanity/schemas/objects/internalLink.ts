@@ -2,7 +2,7 @@ import { LinkIcon } from "@sanity/icons";
 import { defineField } from "sanity";
 
 export default defineField({
-  title: "Internal link to another document",
+  title: "Internal Link",
   name: "internalLink",
   type: "object",
   icon: LinkIcon,

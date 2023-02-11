@@ -1,7 +1,5 @@
-/* eslint-disable prettier/prettier */
-
 // "/product//" => "/product/"
-function removeDoubleSlashes(path: string) {
+export function removeDoubleSlashes(path: string) {
   return path.replace(/\/{2,}/g, "/");
 }
 
@@ -36,11 +34,11 @@ export function getSlugVariations(slug: string) {
 
 export function slugParamToPath(slugParam: string | string[] | undefined) {
   // Possible slug value types:
-  const slug = Array.isArray(slugParam) ? // - ["multiple", "paths"]
-    slugParam.join("/")
+  const slug = Array.isArray(slugParam) // - ["multiple", "paths"]
+    ? slugParam.join("/")
     : // - "single-path"
-    slugParam ||
-    // - undefined -> default to "/"
-    "/";
+      slugParam ||
+      // - undefined -> default to "/"
+      "/";
   return slug;
 }

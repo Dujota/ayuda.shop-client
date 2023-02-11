@@ -11,7 +11,6 @@ const InternalLink = ({ children, value }: any) => {
 
   const href = value.internalPage || value.internalRoute || "#MISSING URL";
 
-  console.log(value);
   return (
     <Link title={value.title} href={href} rel={rel}>
       {children}

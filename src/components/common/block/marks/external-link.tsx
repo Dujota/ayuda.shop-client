@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const externalLink = ({ children, value }: any) => {
+const ExternalLink = ({ children, value }: any) => {
   let target;
   let rel;
 
@@ -16,7 +16,6 @@ const externalLink = ({ children, value }: any) => {
     rel = "noreferrer noopener";
   }
 
-  console.log(value);
   return (
     <Link href={value.href || "MISSING URL"} rel={rel} target={target}>
       {children}
@@ -24,4 +23,4 @@ const externalLink = ({ children, value }: any) => {
   );
 };
 
-export default externalLink;
+export default ExternalLink;

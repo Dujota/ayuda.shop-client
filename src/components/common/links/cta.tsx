@@ -24,7 +24,7 @@ function cta(props: CtaProps) {
           pathname: route.slug.current,
           query: { slug: route.slug.current },
         }}
-        as={`/${route.slug.current}`}
+        as={`${route.slug.current}`}
       >
         {title}
       </Link>

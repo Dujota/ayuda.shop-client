@@ -1,10 +1,11 @@
 import { defineField } from "sanity";
+import { EarthGlobeIcon } from "@sanity/icons";
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default defineField({
-  title: "URL",
+  title: "External link (URL)",
   name: "externalLink",
   type: "object",
+  icon: EarthGlobeIcon,
   fields: [
     {
       title: "Title",
