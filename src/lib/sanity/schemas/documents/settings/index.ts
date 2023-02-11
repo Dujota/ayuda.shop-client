@@ -60,7 +60,7 @@ export default defineType({
         "Used for social media previews when linking to the index page.",
       type: "object",
       components: {
-        input: OpenGraphInput as any,
+        input: OpenGraphInput,
       },
       fields: [
         defineField({

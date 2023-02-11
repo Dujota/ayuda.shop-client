@@ -1,9 +1,9 @@
 import { defineArrayMember, defineField } from "sanity";
+import { annotations } from ".";
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default defineField({
-  title: "Simple Portable Text",
-  name: "simplePortableText",
+  title: "Portable Text",
+  name: "portableText",
   type: "array",
   of: [
     defineArrayMember({
@@ -24,14 +24,10 @@ export default defineField({
           { title: "Emphasis", value: "em" },
           { title: "Code", value: "code" },
         ],
-        annotations: [
-          { name: "link", type: "link" },
-          { name: "internalLink", type: "internalLink" },
-        ],
+        annotations,
       },
     }),
-    defineArrayMember({
-      type: "embedHTML",
-    }),
+    defineArrayMember({ type: "figure" }),
+    defineArrayMember({ type: "embedHTML" }),
   ],
 });
