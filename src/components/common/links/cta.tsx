@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Link from "next/link";
 // import styles from "./Cta.module.css";
 
-interface CtaProps {
+export interface CtaProps {
   title: string;
   route?: {
     slug: {
@@ -11,6 +11,7 @@ interface CtaProps {
     };
   };
   link?: string;
+  _key?: string;
 }
 
 function cta(props: CtaProps) {
