@@ -83,7 +83,7 @@ export default function Layout({
     <>
       <NextSeo
         title={title}
-        titleTemplate={`%s | ${settings.title}`}
+        titleTemplate={`%s | ${settings?.title}`}
         description={description}
         canonical={url && `${url}/${slug}`}
         openGraph={{
@@ -92,7 +92,7 @@ export default function Layout({
         noindex={disallowRobots}
       />
       <Header />
-      <main>{children}</main>
+      <main className="container">{children}</main>
       <Footer />
       {logoUrl && url && <LogoJsonLd url={url} logo={logoUrl} />}
     </>

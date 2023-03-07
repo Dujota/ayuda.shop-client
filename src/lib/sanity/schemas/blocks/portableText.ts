@@ -8,6 +8,7 @@ export default defineField({
   of: [
     defineArrayMember({
       title: "Block",
+      // @ts-ignore TODO: look into this type issue
       styles: [
         { title: "Normal", value: "normal" },
         { title: "H1", value: "h1" },
