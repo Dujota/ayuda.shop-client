@@ -36,7 +36,9 @@ export default defineField({
 
       const subtitle = [];
       if (reference) {
-        subtitle.push([`→ ${referenceTitle || reference?._id}`]);
+        subtitle.push([
+          `→ ${referenceTitle || reference?._id} (${referenceType})`,
+        ]);
       } else {
         subtitle.push("(Nonexistent document reference)");
       }
