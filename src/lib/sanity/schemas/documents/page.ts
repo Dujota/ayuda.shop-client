@@ -33,6 +33,7 @@ export default defineType({
         defineArrayMember({ type: "imageSection" }),
         defineArrayMember({ type: "mailchimp" }),
         defineArrayMember({ type: "textSection" }),
+        defineArrayMember({ type: "searchBarSection" }),
       ],
     }),
     defineField({
