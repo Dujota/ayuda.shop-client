@@ -76,7 +76,7 @@ export default function Header() {
           )}
         </p>
       </div>
-      <nav>
+      <nav className="container mx-auto">
         <ul className={styles.navItems}>
           <li className={styles.navItem}>
             <Link href="/">Home</Link>

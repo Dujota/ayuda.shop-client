@@ -92,7 +92,7 @@ export default function Layout({
         noindex={disallowRobots}
       />
       <Header />
-      <main className="container">{children}</main>
+      <main>{children}</main>
       <Footer />
       {logoUrl && url && <LogoJsonLd url={url} logo={logoUrl} />}
     </>

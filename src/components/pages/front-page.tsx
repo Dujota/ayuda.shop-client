@@ -20,6 +20,10 @@ export default function FrontPage({
     <>
       <Head>
         <link rel="icon" href="/favicon.ico" />
+        <link href="/output.css" rel="stylesheet"></link>
+        <link rel="preconnect" href="https://fonts.googleapis.com"></link>
+        <link rel="preconnect" href="https://fonts.gstatic.com"></link>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Quicksand:wght@700&display=swap" rel="stylesheet"></link>
         <meta
           name="description"
           content="Find the help you need for a project!"
