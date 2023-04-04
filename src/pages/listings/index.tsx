@@ -8,6 +8,7 @@ import { getAllListings } from "@/lib/listings/queries";
 import Title from "@/components/common/pages/title";
 import Listings from "@/components/listings/listings";
 import Link from "next/link";
+import Layout from "@/components/common/layout/layout";
 
 type Props = {
   listings?: Listing[];
@@ -15,25 +16,27 @@ type Props = {
 
 const ListingsLandingPage: NextPage = ({ listings }: Props) => {
   return (
-    <div>
-      <Title>Listings Landing Page</Title>
-      <div className="buttons">
-        <Link href="/listings/new-listing">
-          <button
-            style={{
-              height: 60,
-              width: 150,
-              margin: 10,
-              backgroundColor: "fuchsia",
-              borderRadius: 16,
-            }}
-          >
-            Create a Listing
-          </button>
-        </Link>
+    <Layout>
+      <div>
+        <Title>Listings Landing Page</Title>
+        <div className="buttons">
+          <Link href="/listings/new-listing">
+            <button
+              style={{
+                height: 60,
+                width: 150,
+                margin: 10,
+                backgroundColor: "fuchsia",
+                borderRadius: 16,
+              }}
+            >
+              Create a Listing
+            </button>
+          </Link>
+        </div>
+        <Listings listings={listings} />
       </div>
-      <Listings listings={listings} />
-    </div>
+    </Layout>
   );
 };
 

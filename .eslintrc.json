@@ -11,12 +11,15 @@
   "extends": [
     "next/core-web-vitals",
     "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "@sanity/eslint-config-studio"
   ],
   "rules": {
+    "max-len": ["error", {"code": 160, "ignoreUrls": true}],
     "@typescript-eslint/consistent-type-imports": "warn",
     "prettier/prettier": "error",
     "arrow-body-style": "off",
-    "prefer-arrow-callback": "off"
+    "prefer-arrow-callback": "off",
+    "@typescript-eslint/ban-ts-comment": "off"
   }
 }

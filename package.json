@@ -9,24 +9,40 @@
     "start": "next start"
   },
   "dependencies": {
+    "@portabletext/react": "^2.0.1",
     "@rails/actioncable": "^7.0.4-1",
+    "@sanity/image-url": "^1.0.2",
+    "@sanity/vision": "^3.0.0",
     "@types/styled-components": "^5.1.26",
+    "@vercel/og": "^0.1.0",
     "axios": "^1.2.1",
+    "bcp-47": "^2.1.0",
     "date-fns": "^2.29.3",
+    "intl-segmenter-polyfill": "^0.4.4",
     "little-state-machine": "^4.8.0",
     "next": "13.0.2",
+    "next-sanity": "^4.1.2",
+    "next-seo": "^5.15.0",
     "next-auth": "^4.20.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.41.1",
+    "react-inlinesvg": "^3.0.1",
+    "sanity": "^3.3.1",
+    "slug": "^8.2.2",
     "styled-components": "^5.3.6",
+    "suspend-react": "^0.0.9",
+    "swr": "^2.0.3",
     "zod": "^3.18.0"
   },
   "devDependencies": {
+    "@sanity/eslint-config-studio": "^2.0.1",
+    "@svgr/webpack": "^6.5.1",
     "@types/node": "^18.0.0",
     "@types/rails__actioncable": "^6.1.6",
     "@types/react": "^18.0.14",
     "@types/react-dom": "^18.0.5",
+    "@types/slug": "^5.0.3",
     "@typescript-eslint/eslint-plugin": "^5.33.0",
     "@typescript-eslint/parser": "^5.33.0",
     "autoprefixer": "^10.4.7",
@@ -41,5 +57,8 @@
   },
   "ct3aMetadata": {
     "initVersion": "6.11.4"
+  },
+  "engines": {
+    "node": ">=16"
   }
 }

@@ -24,6 +24,7 @@ import type { ConversationResponse, Message } from "@/types/conversations";
 
 // Components
 import ChatRoom from "@/components/conversations/chat-room";
+import Layout from "@/components/common/layout/layout";
 
 const ConversationDetailPage: NextPage = ({
   conversation,
@@ -57,20 +58,26 @@ const ConversationDetailPage: NextPage = ({
   }
 
   if (status === "unauthenticated") {
-    return <GuestSignin />;
+    return (
+      <Layout>
+        <GuestSignin />
+      </Layout>
+    );
   }
 
   if (!conversation) return null;
 
   return (
-    <section>
-      <ChatRoom
-        channel={channel}
-        conversation={conversation}
-        history={messages}
-        user={session?.user}
-      />
-    </section>
+    <Layout>
+      <section>
+        <ChatRoom
+          channel={channel}
+          conversation={conversation}
+          history={messages}
+          user={session?.user}
+        />
+      </section>
+    </Layout>
   );
 };
 

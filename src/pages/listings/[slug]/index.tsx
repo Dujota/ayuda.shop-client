@@ -9,6 +9,7 @@ import type { Listing as ListingType } from "@/types/listing";
 import type { NextPage, GetServerSideProps } from "next";
 import { useSession } from "next-auth/react";
 import { getServerAuthSession } from "@/server/common/get-server-auth-session";
+import Layout from "@/components/common/layout/layout";
 
 type Props = {
   listing?: ListingType;
@@ -22,15 +23,21 @@ const ListingDetailPage: NextPage = ({ listing }: Props) => {
   }
 
   if (status === "unauthenticated") {
-    return <GuestSignin />;
+    return (
+      <Layout>
+        <GuestSignin />;
+      </Layout>
+    );
   }
 
   if (!listing) return null;
 
   return (
-    <section>
-      <Listing listing={listing} />
-    </section>
+    <Layout>
+      <section>
+        <Listing listing={listing} />
+      </section>
+    </Layout>
   );
 };
 
