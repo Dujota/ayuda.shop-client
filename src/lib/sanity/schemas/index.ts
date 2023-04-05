@@ -43,8 +43,8 @@ import imageSection from "./objects/sections/imageSection";
 import mailchimp from "./objects/sections/mailchimp";
 import textSection from "./objects/sections/textSection";
 import searchBarSection from "./objects/sections/searchBarSection";
-
-const sections = [hero, imageSection, mailchimp, textSection, searchBarSection];
+import categoriesListSection from "./objects/sections/categoriesListSection";
+const sections = [hero, imageSection, mailchimp, textSection, searchBarSection, categoriesListSection];
 
 export const schemaTypes = [
   ...documents,

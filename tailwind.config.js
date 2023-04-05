@@ -6,6 +6,7 @@ module.exports = {
       'blue': '#6F85C5',
       'red': '#E55F7F',
       'white': '#FFFFFF',
+      'grey': '#D2D2D2'
     },
     fontFamily: {
       'heading': ['Quicksand'],

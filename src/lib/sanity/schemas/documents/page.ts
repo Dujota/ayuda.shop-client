@@ -34,6 +34,7 @@ export default defineType({
         defineArrayMember({ type: "mailchimp" }),
         defineArrayMember({ type: "textSection" }),
         defineArrayMember({ type: "searchBarSection" }),
+        defineArrayMember({ type: "categoriesListSection" }),
       ],
     }),
     defineField({
