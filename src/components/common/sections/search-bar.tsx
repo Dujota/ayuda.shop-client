@@ -1,6 +1,8 @@
 // import styles from "./TextSection.module.css";
 // TODO: check the styles module and add the tailwind classes or make a styled component
 
+import { ImLocation, ImSearch, ImArrowRight2 } from "react-icons/im";
+
 interface SearchBarSectionProps {
   heading: string;
   subtext: string;
@@ -18,7 +20,7 @@ const SearchBarSection = ({ heading, subtext, label, searchPlaceholder, postalPl
     HeadingText = <div className="search-bar-label">{label}</div>
   } else {
     HeadingText = <div className="flex flex-col items-center">
-      <h2 className="search-bar-heading text-center font-heading text-white text-5xl max-w-3xl">{heading}</h2>
+      <h2 className="search-bar-heading text-center font-heading text-white text-5xl max-w-3xl mb-6 leading-none">{heading}</h2>
       <h3 className="search-bar-subtext text-center font-text text-white leading-6">{subtext}</h3>
     </div>
   }
@@ -31,17 +33,17 @@ const SearchBarSection = ({ heading, subtext, label, searchPlaceholder, postalPl
 
         <div className="search-bar-fields-wrap flex justify-center pt-16">
 
-          <div className="search-bar-query-wrap p-3 bg-white flex-initial w-96 rounded-l">
-            <div className="search-bar-query-icon"></div>
-            <input placeholder={searchPlaceholder} type="text" className="search-bar-query-field w-full" />
+          <div className="search-bar-query-wrap p-3 bg-white flex-initial w-96 rounded-l flex items-center">
+            <ImSearch />
+            <input placeholder={searchPlaceholder} type="text" className="search-bar-query-field w-full ml-2" />
           </div>
 
-          <div className="search-bar-postal-wrap p-3 bg-white flex-initial w-48">
-            <div className="search-bar-postal-icon"></div>
-            <input placeholder={postalPlaceholder} type="text" className="search-bar-postal-field w-full" />
+          <div className="search-bar-postal-wrap p-3 bg-white flex-initial w-48 flex items-center">
+            <ImLocation />
+            <input placeholder={postalPlaceholder} type="text" className="search-bar-postal-field w-full ml-2" />
           </div>
 
-          <div className="search-bar-submit-button p-3 bg-red flex-none rounded-r">{buttonText ? buttonText : "->"}</div>
+          <div className="search-bar-submit-button py-3 px-5 bg-red flex-none rounded-r flex items-center">{buttonText ? buttonText : <ImArrowRight2 color="white"/>}</div>
         </div>
 
       </section>
