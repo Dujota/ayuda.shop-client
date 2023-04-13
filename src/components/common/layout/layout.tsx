@@ -76,7 +76,7 @@ export default function Layout({
     : [];
 
   // eslint-disable-next-line prettier/prettier
-  const { mainNavigation, footerNavigation, footerText, logo, url } = settings || {};
+  const { mainNavigation, footerNavigation, footerText, footerNavigationTitle, logo, url, alt } = settings || {};
   const logoUrl = logo && logo.asset && logo.asset.url;
 
   return (
@@ -93,7 +93,13 @@ export default function Layout({
       />
       <Header />
       <main>{children}</main>
-      <Footer />
+      <Footer 
+        logo={logo}
+        footerText={footerText}
+        footerNavigation={footerNavigation}
+        footerNavigationTitle={footerNavigationTitle}
+        />
+
       {logoUrl && url && <LogoJsonLd url={url} logo={logoUrl} />}
     </>
   );

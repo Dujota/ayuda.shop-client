@@ -16,18 +16,18 @@ const CategoriesListSection = ({ heading, subtext, categoriesList, buttonText, b
 
   let HeadingText;
 
-    HeadingText = <div className="flex flex-col items-center mb-9">
+    HeadingText = <div className="flex flex-col items-center mb-20">
       <h2 className="text-center font-heading text-5xl max-w-3xl mb-4 font-bold">{heading}</h2>
       <h3 className="text-center font-text leading-6 font-medium">{subtext}</h3>
     </div>
 
   return (
     <div className="py-20">
-      <section className="flex flex-col items-center container mx-auto">
+      <section className="flex flex-col items-center container">
 
         {HeadingText}
 
-        <div className="flex justify-center gap-6">
+        <div className="flex justify-center gap-6 flex-wrap">
         {categoriesList.map(item => {
           return <a className="w-44 h-36 border border-grey rounded-xl flex flex-col items-center justify-center"
             href={item.url}>
